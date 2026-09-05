@@ -389,11 +389,22 @@
       cursor: pointer;
       font-size: 0.9rem;
       width: 100%;
+      transition: background-color 0.2s;
     }
 
     .btn-submit:hover { background-color: #0369a1; }
-    .form-status { margin-top: 15px; font-size: 0.85rem; text-align: center; display: none; }
-    .form-status.success { color: #4ade80; }
+    .btn-submit:disabled { background-color: #64748b; cursor: not-allowed; }
+
+    .form-status { 
+      margin-top: 15px; 
+      font-size: 0.85rem; 
+      text-align: center; 
+      display: none; 
+      padding: 10px;
+      border-radius: 6px;
+    }
+    .form-status.success { color: #4ade80; background-color: rgba(74, 222, 128, 0.1); border: 1px solid rgba(74, 222, 128, 0.2); }
+    .form-status.error { color: #fca5a5; background-color: rgba(252, 165, 165, 0.1); border: 1px solid rgba(252, 165, 165, 0.2); }
 
     /* Stopka */
     footer {
@@ -552,7 +563,7 @@
     <div id="about-tab" class="tab-content">
       <div class="about-container">
         <h2 class="form-title" style="margin-bottom: 8px;">O Systemie European Threat Detection</h2>
-        <p class="form-subtitle">Zintegrowana platforma analityczno-monitoringowa dedykowana identyfikacji zagrożeń bezpieczeństwa w przestrzeni europejskiej.</p>
+        <p class="form-subtitle">Zintegowana platforma analityczno-monitoringowa dedykowana identyfikacji zagrożeń bezpieczeństwa w przestrzeni europejskiej.</p>
 
         <div class="about-grid">
           <div class="about-card">
@@ -595,25 +606,25 @@
         <h2 class="form-title">Napisz do nas</h2>
         <p class="form-subtitle">Masz pytania dotyczące działania systemu lub chcesz zgłosić uwagę? Wypełnij formularz.</p>
 
-        <form id="contact-form" onsubmit="handleFormSubmit(event, 'contact-status')">
+        <form id="contact-form" onsubmit="sendEmail(event, 'Formularz Kontaktowy - European Threat Detection', 'contact-status')">
           <div class="form-group">
             <label for="contact-name">Imię i nazwisko / Pseudonim</label>
-            <input type="text" id="contact-name" class="form-control" placeholder="np. Jan Kowalski" required>
+            <input type="text" name="name" id="contact-name" class="form-control" placeholder="np. Jan Kowalski" required>
           </div>
           <div class="form-group">
             <label for="contact-email">Adres e-mail</label>
-            <input type="email" id="contact-email" class="form-control" placeholder="nazwa@domena.pl" required>
+            <input type="email" name="email" id="contact-email" class="form-control" placeholder="nazwa@domena.pl" required>
           </div>
           <div class="form-group">
             <label for="contact-subject">Temat wiadomości</label>
-            <input type="text" id="contact-subject" class="form-control" placeholder="Wpisz temat" required>
+            <input type="text" name="subject" id="contact-subject" class="form-control" placeholder="Wpisz temat" required>
           </div>
           <div class="form-group">
             <label for="contact-message">Treść wiadomości</label>
-            <textarea id="contact-message" class="form-control" placeholder="Opisz swoje zapytanie..." required></textarea>
+            <textarea name="message" id="contact-message" class="form-control" placeholder="Opisz swoje zapytanie..." required></textarea>
           </div>
           <button type="submit" class="btn-submit">Wyślij wiadomość</button>
-          <div id="contact-status" class="form-status">Dziękujemy! Wiadomość została wysłana.</div>
+          <div id="contact-status" class="form-status"></div>
         </form>
       </div>
     </div>
@@ -624,34 +635,34 @@
         <h2 class="form-title">Nawiąż współpracę</h2>
         <p class="form-subtitle">Jesteś przedstawicielem służb, analitykiem lub organizacją technologiczną? Dołącz do projektu.</p>
 
-        <form id="cooperation-form" onsubmit="handleFormSubmit(event, 'cooperation-status')">
+        <form id="cooperation-form" onsubmit="sendEmail(event, 'Zgłoszenie Współpracy - European Threat Detection', 'cooperation-status')">
           <div class="form-group">
             <label for="coop-entity">Nazwa organizacji / Służby / Firmy</label>
-            <input type="text" id="coop-entity" class="form-control" placeholder="np. Centrum Analiz Bezpieczeństwa" required>
+            <input type="text" name="organization" id="coop-entity" class="form-control" placeholder="np. Centrum Analiz Bezpieczeństwa" required>
           </div>
           <div class="form-group">
             <label for="coop-person">Osoba do kontaktu</label>
-            <input type="text" id="coop-person" class="form-control" placeholder="Imię i nazwisko" required>
+            <input type="text" name="name" id="coop-person" class="form-control" placeholder="Imię i nazwisko" required>
           </div>
           <div class="form-group">
             <label for="coop-email">Służbowy e-mail kontaktowy</label>
-            <input type="email" id="coop-email" class="form-control" placeholder="kontakt@organizacja.pl" required>
+            <input type="email" name="email" id="coop-email" class="form-control" placeholder="kontakt@organizacja.pl" required>
           </div>
           <div class="form-group">
             <label for="coop-type">Obszar współpracy</label>
-            <select id="coop-type" class="form-control">
-              <option value="data">Dostarczanie danych i API Threat-Intelligence</option>
-              <option value="tech">Rozwój technologiczny / Integracja</option>
-              <option value="patronage">Patronat / Sponsoring</option>
-              <option value="other">Inny obszar</option>
+            <select name="cooperation_type" id="coop-type" class="form-control">
+              <option value="Dostarczanie danych i API">Dostarczanie danych i API Threat-Intelligence</option>
+              <option value="Rozwój technologiczny / Integracja">Rozwój technologiczny / Integracja</option>
+              <option value="Patronat / Sponsoring">Patronat / Sponsoring</option>
+              <option value="Inny obszar">Inny obszar</option>
             </select>
           </div>
           <div class="form-group">
             <label for="coop-details">Szczegóły propozycji</label>
-            <textarea id="coop-details" class="form-control" placeholder="Opisz krótko proponowany zakres współpracy..." required></textarea>
+            <textarea name="message" id="coop-details" class="form-control" placeholder="Opisz krótko proponowany zakres współpracy..." required></textarea>
           </div>
           <button type="submit" class="btn-submit">Wyślij zgłoszenie współpracy</button>
-          <div id="cooperation-status" class="form-status">Dziękujemy za zgłoszenie. Skontaktujemy się wkrótce!</div>
+          <div id="cooperation-status" class="form-status"></div>
         </form>
       </div>
     </div>
@@ -674,15 +685,31 @@
         </div>
         <span>Online teraz:</span>
         <span id="online-count" class="counter-value">1</span>
+		
       </div>
     </div>
   </footer>
+  <!-- OSOBNY WIERSZ: AKTUALIZACJA BAZY -->
+<div style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.75rem; opacity: 0.8; margin-top: 6px;">
+  <!-- Kropka statusu -->
+  <span id="status-dot" style="width: 8px; height: 8px; background-color: #6c757d; border-radius: 50%; display: inline-block;"></span>
+  
+  <!-- Separator -->
+  <span style="opacity: 0.4;">|</span>
+  
+  <!-- Tekst z datą -->
+  <span>Ostatnia aktualizacja bazy: <strong id="last-update-time" style="color: inherit;">Ładowanie...</strong></span>
+</div>
 
   <!-- SKRYPTY -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
+    // --- KONFIGURACJA KLUCZY ---
+    // Wklej poniżej darmowy klucz z web3forms.com
+    const WEB3FORMS_KEY = 'd51f7c74-6e19-4f0a-bd21-8537bed68ffa';
+
     let map = null;
     let markersGroup = null;
     let allAlertsData = [];
@@ -715,16 +742,49 @@
       }
     }
 
-    function handleFormSubmit(event, statusElementId) {
+    // --- 2. OBSŁUGA WYSYŁANIA E-MAILI (WEB3FORMS) ---
+    async function sendEmail(event, emailSubject, statusElementId) {
       event.preventDefault();
+      
+      const form = event.target;
+      const submitBtn = form.querySelector('.btn-submit');
       const statusEl = document.getElementById(statusElementId);
-      statusEl.style.display = 'block';
-      statusEl.classList.add('success');
-      event.target.reset();
-      setTimeout(() => { statusEl.style.display = 'none'; }, 5000);
+
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Wysyłanie...';
+      statusEl.style.display = 'none';
+
+      const formData = new FormData(form);
+      formData.append('access_key', WEB3FORMS_KEY);
+      formData.append('subject', emailSubject);
+
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          statusEl.innerText = 'Dziękujemy! Wiadomość została pomyślnie wysłana.';
+          statusEl.className = 'form-status success';
+          statusEl.style.display = 'block';
+          form.reset();
+        } else {
+          throw new Error(result.message || 'Wystąpił błąd podczas wysyłania.');
+        }
+      } catch (error) {
+        statusEl.innerText = 'Błąd wysyłania. Upewnij się, że wpisałeś poprawny klucz Access Key.';
+        statusEl.className = 'form-status error';
+        statusEl.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Wyślij wiadomość';
+      }
     }
 
-    // --- 2. MAPA LEAFLET ---
+    // --- 3. MAPA LEAFLET ---
     function initMap() {
       map = L.map('map', {
         center: [50.1109, 8.6821],
@@ -740,7 +800,7 @@
       markersGroup = L.layerGroup().addTo(map);
     }
 
-    // --- 3. SUPABASE & ALERT SYSTEM ---
+    // --- 4. SUPABASE & ALERT SYSTEM ---
     const SUPABASE_URL = 'https://enotstzvfbiadbzrsjtr.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVub3RzdHp2ZmJpYWRienJzanRyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4NTEyNTEsImV4cCI6MjEwMzQyNzI1MX0._sAR9_idTEC4AlJL1R6Jvj3f5Rq5tRpVtGAy-UtvCps';
 
@@ -832,7 +892,7 @@
       });
     }
 
-    // --- 4. GENEROWANIE DYNAMICZNYCH STATYSTYK MIAST ---
+    // --- 5. GENEROWANIE DYNAMICZNYCH STATYSTYK MIAST ---
     function renderStatistics(alerts) {
       const cityListEl = document.getElementById('city-stats-list');
       const typeListEl = document.getElementById('type-stats-list');
@@ -909,7 +969,7 @@
       }
     }
 
-    // --- 5. LICZNIKI ---
+    // --- 6. LICZNIKI ---
     async function initTotalViewsCounter() {
       const viewsElement = document.getElementById('total-views');
       if (!viewsElement) return;
@@ -961,5 +1021,73 @@
     initTotalViewsCounter();
     initOnlinePresenceCounter();
   </script>
+  <!-- ======================================================= -->
+<!-- SKRYPT STATUSU SYSTEMU I OSTATNIEJ AKTUALIZACJI SUPABASE -->
+<!-- ======================================================= -->
+<script>
+  async function fetchLastUpdateTime() {
+    const timeElement = document.getElementById('last-update-time');
+    const statusDot = document.getElementById('status-dot');
+    
+    // Jeśli brak elementu na stronie, przerwij wykonywanie
+    if (!timeElement) return;
+
+    try {
+      // Pobieramy wyłącznie 1 najnowszy rekord z tabeli 'alerts'
+      const { data, error } = await supabaseClient
+        .from('alerts')
+        .select('created_at')
+        .order('created_at', { ascending: false })
+        .limit(1);
+
+      if (error) throw error;
+
+      if (data && data.length > 0) {
+        const lastDate = new Date(data[0].created_at);
+        
+        // Formatowanie daty do czytelnego formatu (np. 05.09.2026, 17:58)
+        const formattedDate = lastDate.toLocaleString('pl-PL', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+
+        // Wstawienie sformatowanej daty na stronę
+        timeElement.textContent = formattedDate;
+
+        // Opcjonalnie: zmiana koloru kropki statusu (jeśli dodano element #status-dot)
+        if (statusDot) {
+          const now = new Date();
+          const hoursDifference = (now - lastDate) / (1000 * 60 * 60);
+
+          // Jeśli dane są młodsze niż 24 godziny -> zielona kropka, w przeciwnym razie -> żółta
+          if (hoursDifference <= 24) {
+            statusDot.style.backgroundColor = '#28a745'; // Zielony
+            statusDot.title = 'System działa prawidłowo (dane z ostatnich 24h)';
+          } else {
+            statusDot.style.backgroundColor = '#ffc107'; // Żółty / Pomarańczowy
+            statusDot.title = 'Ostatni alert był generowany dawniej niż 24h temu';
+          }
+        }
+
+      } else {
+        timeElement.textContent = 'Brak wpisów w bazie';
+        if (statusDot) statusDot.style.backgroundColor = '#dc3545'; // Czerwony
+      }
+    } catch (err) {
+      console.error('Błąd podczas pobierania daty aktualizacji:', err);
+      timeElement.textContent = 'Błąd połączenia z bazą';
+      if (statusDot) statusDot.style.backgroundColor = '#dc3545'; // Czerwony
+    }
+  }
+
+  // Automatyczne uruchomienie po załadowaniu drzewa DOM
+  document.addEventListener('DOMContentLoaded', () => {
+    fetchLastUpdateTime();
+  });
+</script>
+  
 </body>
 </html>
