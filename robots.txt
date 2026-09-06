@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: [https://crime-alert-bot.github.io/European-Threat-Detection/sitemap.xml](https://crime-alert-bot.github.io/European-Threat-Detection/sitemap.xml)
