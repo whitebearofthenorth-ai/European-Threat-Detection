@@ -673,7 +673,7 @@
     <div class="counter-widget">
       <div class="counter-item">
         <span>Odwiedzin łącznie:</span>
-        <span id="total-views" class="counter-value">---</span>
+        <span id="total-views" class="counter-value">...</span>
       </div>
 
       <div class="divider"></div>
@@ -813,6 +813,32 @@
       auth: { persistSession: false }
     });
 
+    // LICZNIK ODWIEDZIN (SESSIONSTORAGE - OCHRONA PRZED NABIJANIEM REFRESHAMI)
+    async function updatePageViews() {
+      try {
+        const hasVisited = sessionStorage.getItem('page_visited');
+        let rpcMethod = 'increment_page_views';
+
+        if (hasVisited) {
+          rpcMethod = 'get_page_views';
+        }
+
+        const { data, error } = await supabaseClient.rpc(rpcMethod);
+
+        if (error) {
+          console.error('Błąd Supabase RPC:', error);
+          return;
+        }
+
+        if (data !== null && data !== undefined) {
+          sessionStorage.setItem('page_visited', 'true');
+          document.getElementById('total-views').innerText = Number(data).toLocaleString('pl-PL');
+        }
+      } catch (err) {
+        console.error('Wyjątek sieciowy:', err);
+      }
+    }
+
     async function loadAlerts() {
       try {
         const { data, error } = await supabaseClient
@@ -936,47 +962,48 @@
 
       const totalAlerts = alerts.length || 1;
 
-      // Generowanie wg miast
-      const sortedCities = Object.entries(cityCounts).sort((a, b) => b[1] - a[1]);
-      sortedCities.forEach(([city, count]) => {
-        const pct = Math.round((count / totalAlerts) * 100);
-        const itemHtml = `
-          <div class="stat-bar-item">
-            <div class="stat-bar-header">
-              <span>📍 ${city}</span>
-              <span style="font-weight: 700; color: #ef4444;">${count} incydenty (${pct}%)</span>
+      // Generowanie wykresów miast
+      Object.entries(cityCounts)
+        .sort((a, b) => b[1] - a[1])
+        .forEach(([city, count]) => {
+          const percentage = Math.round((count / totalAlerts) * 100);
+          cityListEl.innerHTML += `
+            <div class="stat-bar-item">
+              <div class="stat-bar-header">
+                <span>📍 ${city}</span>
+                <span class="counter-value">${count} alertów (${percentage}%)</span>
+              </div>
+              <div class="stat-bar-bg">
+                <div class="stat-bar-fill" style="width: ${percentage}%;"></div>
+              </div>
             </div>
-            <div class="stat-bar-bg">
-              <div class="stat-bar-fill" style="width: ${pct}%; background-color: #ef4444;"></div>
-            </div>
-          </div>
-        `;
-        cityListEl.innerHTML += itemHtml;
-      });
+          `;
+        });
 
-      // Generowanie wg typów
-      const sortedTypes = Object.entries(typeCounts).sort((a, b) => b[1] - a[1]);
-      sortedTypes.forEach(([typeName, count]) => {
-        const pct = Math.round((count / totalAlerts) * 100);
-        const itemHtml = `
-          <div class="stat-bar-item">
-            <div class="stat-bar-header">
-              <span>${typeName}</span>
-              <span style="font-weight: 700; color: #38bdf8;">${count} (${pct}%)</span>
+      // Generowanie wykresów typów zagrożeń
+      Object.entries(typeCounts)
+        .sort((a, b) => b[1] - a[1])
+        .forEach(([type, count]) => {
+          const percentage = Math.round((count / totalAlerts) * 100);
+          typeListEl.innerHTML += `
+            <div class="stat-bar-item">
+              <div class="stat-bar-header">
+                <span>⚠️ ${type}</span>
+                <span class="counter-value">${count} zdarzeń (${percentage}%)</span>
+              </div>
+              <div class="stat-bar-bg">
+                <div class="stat-bar-fill" style="width: ${percentage}%; background-color: #f97316;"></div>
+              </div>
             </div>
-            <div class="stat-bar-bg">
-              <div class="stat-bar-fill" style="width: ${pct}%; background-color: #38bdf8;"></div>
-            </div>
-          </div>
-        `;
-        typeListEl.innerHTML += itemHtml;
-      });
+          `;
+        });
     }
 
     // --- INICJALIZACJA SYSTEMU ---
     window.addEventListener('DOMContentLoaded', () => {
       initMap();
       loadAlerts();
+      updatePageViews();
     });
   </script>
 </body>
