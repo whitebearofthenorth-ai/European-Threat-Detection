@@ -1169,5 +1169,185 @@
     fetchAlerts();             // Tabela alertów
   });
 </script>
+<!-- Wklej ten skrypt przed zamykającym tagiem </body> w index.html -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // 1. KONFIGURACJA SUPABASE (Uzupełnij swoje dane)
+  const SUPABASE_URL = 'https://TWOJ-PROJECT-ID.supabase.co';
+  const SUPABASE_ANON_KEY = 'TWOJ_PUBLIC_ANON_KEY';
+  
+  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // 2. CZAŚ OSTATNIEJ INGESTII BOTA (po created_at)
+  async function fetchLastDatabaseUpdate() {
+    const updateElement = document.getElementById('last-update');
+    if (!updateElement) return;
+
+    try {
+      const { data, error } = await supabase
+        .from('alerts')
+        .select('created_at')
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      if (error) throw error;
+
+      if (data && data.created_at) {
+        const dateObj = new Date(data.created_at);
+        updateElement.innerText = dateObj.toLocaleString('pl-PL', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+        });
+      } else {
+        updateElement.innerText = 'Brak wpisów w bazie';
+      }
+    } catch (err) {
+      console.error('Błąd odczytu czasu aktualizacji:', err.message);
+      updateElement.innerText = 'Błąd odczytu';
+    }
+  }
+
+  // 3. LICZNIK ODWIEDZIN (Izolowany z fallbackiem)
+  async function updateAndFetchCounter() {
+    const counterElement = document.getElementById('views-counter');
+    if (!counterElement) return;
+
+    try {
+      const { data: newCount, error: rpcError } = await supabase.rpc('increment_page_views');
+
+      if (rpcError) {
+        console.warn('RPC Error licznika:', rpcError.message);
+        const { data: fallbackData } = await supabase
+          .from('page_views')
+          .select('views_count')
+          .eq('id', 1)
+          .maybeSingle();
+
+        if (fallbackData && fallbackData.views_count !== undefined) {
+          counterElement.innerText = fallbackData.views_count;
+        }
+        return;
+      }
+
+      if (newCount !== null && newCount !== undefined) {
+        counterElement.innerText = newCount;
+      }
+    } catch (err) {
+      console.error('Błąd licznika odwiedzin:', err.message);
+    }
+  }
+
+  // 4. RENDEROWANIE ALERTÓW DLA STRONY GŁÓWNEJ (Ścisła chronologia)
+  async function fetchMainAlerts() {
+    const alertsContainer = document.getElementById('alerts-list');
+    if (!alertsContainer) return;
+
+    try {
+      const { data: alerts, error } = await supabase
+        .from('alerts')
+        .select('*')
+        .order('pub_date', { ascending: false })
+        .order('created_at', { ascending: false }) // Drugi stopień sortowania
+        .limit(20);
+
+      if (error) throw error;
+
+      if (!alerts || alerts.length === 0) {
+        alertsContainer.innerHTML = '<tr><td colspan="5" class="text-center">Brak aktywnych alertów w tej chwili.</td></tr>';
+        return;
+      }
+
+      alertsContainer.innerHTML = alerts.map(alert => {
+        const pubDate = new Date(alert.pub_date).toLocaleString('pl-PL', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+
+        return `
+          <tr>
+            <td><strong>[${alert.country}]</strong></td>
+            <td><span class="badge badge-${alert.type}">${alert.type_name || alert.type}</span></td>
+            <td>
+              <a href="${alert.source_url}" target="_blank" rel="noopener noreferrer">
+                ${alert.title}
+              </a>
+            </td>
+            <td>${alert.summary || ''}</td>
+            <td><small>${pubDate}</small></td>
+          </tr>
+        `;
+      }).join('');
+
+    } catch (err) {
+      console.error('Błąd ładowania alertów:', err.message);
+      alertsContainer.innerHTML = '<tr><td colspan="5" class="text-center">Błąd pobierania danych.</td></tr>';
+    }
+  }
+
+  // 5. RENDEROWANIE ARCHIWUM (Jeśli występuje na stronie)
+  async function fetchArchiveAlerts() {
+    const archiveContainer = document.getElementById('archive-list');
+    if (!archiveContainer) return;
+
+    try {
+      const { data: alerts, error } = await supabase
+        .from('alerts')
+        .select('*')
+        .order('pub_date', { ascending: false })
+        .order('created_at', { ascending: false })
+        .limit(100);
+
+      if (error) throw error;
+
+      if (!alerts || alerts.length === 0) {
+        archiveContainer.innerHTML = '<tr><td colspan="5" class="text-center">Archiwum jest puste.</td></tr>';
+        return;
+      }
+
+      archiveContainer.innerHTML = alerts.map(alert => {
+        const pubDate = new Date(alert.pub_date).toLocaleString('pl-PL', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+
+        return `
+          <tr>
+            <td><strong>[${alert.country}]</strong></td>
+            <td><span class="badge badge-${alert.type}">${alert.type_name || alert.type}</span></td>
+            <td>
+              <a href="${alert.source_url}" target="_blank" rel="noopener noreferrer">
+                ${alert.title}
+              </a>
+            </td>
+            <td>${alert.summary || ''}</td>
+            <td><small>${pubDate}</small></td>
+          </tr>
+        `;
+      }).join('');
+
+    } catch (err) {
+      console.error('Błąd ładowania archiwum:', err.message);
+    }
+  }
+
+  // INICJALIZACJA
+  document.addEventListener('DOMContentLoaded', () => {
+    fetchLastDatabaseUpdate();
+    updateAndFetchCounter();
+    fetchMainAlerts();
+    fetchArchiveAlerts();
+  });
+</script>
 </body>
 </html>
