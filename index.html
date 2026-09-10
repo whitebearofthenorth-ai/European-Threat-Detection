@@ -1084,22 +1084,53 @@
 
   // 4. POBIERANIE I RENDEROWANIE ALERTÓW DLA TABELI
   async function fetchAlerts() {
-    const alertsContainer = document.getElementById('alerts-list');
-    if (!alertsContainer) return;
+  const alertsContainer = document.getElementById('alerts-list');
+  if (!alertsContainer) return;
 
-    try {
-      const { data: alerts, error } = await supabase
-        .from('alerts')
-        .select('*')
-        .order('pub_date', { ascending: false })
-        .limit(30);
+  try {
+    const { data: alerts, error } = await supabase
+      .from('alerts')
+      .select('*')
+      .order('pub_date', { ascending: false })
+      .limit(30);
 
-      if (error) throw error;
+    if (error) throw error;
 
-      if (!alerts || alerts.length === 0) {
-        alertsContainer.innerHTML = '<tr><td colspan="5">Brak aktywnych alertów.</td></tr>';
-        return;
-      }
+    if (!alerts || alerts.length === 0) {
+      alertsContainer.innerHTML = '<tr><td colspan="5">Brak aktywnych alertów.</td></tr>';
+      return;
+    }
+
+    // Renderowanie wierszy tabeli z pełną datą
+    alertsContainer.innerHTML = alerts.map(alert => {
+      const pubDate = new Date(alert.pub_date).toLocaleString('pl-PL', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+
+      return `
+        <tr>
+          <td><strong>[${alert.country}]</strong></td>
+          <td><span class="badge badge-${alert.type}">${alert.type_name || alert.type}</span></td>
+          <td>
+            <a href="${alert.source_url}" target="_blank" rel="noopener noreferrer">
+              ${alert.title}
+            </a>
+          </td>
+          <td>${alert.summary || ''}</td>
+          <td><small>${pubDate}</small></td>
+        </tr>
+      `;
+    }).join('');
+
+  } catch (err) {
+    console.error('Błąd podczas renderowania listy alertów:', err.message);
+    alertsContainer.innerHTML = '<tr><td colspan="5">Wystąpił błąd podczas ładowania danych.</td></tr>';
+  }
+}
 
       // Renderowanie wierszy tabeli
       alertsContainer.innerHTML = alerts.map(alert => {
