@@ -1,3 +1,4 @@
+<!-- ETD FRONTEND V2.5.8 - UX / VISUAL LIFT V6 -->
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -90,6 +91,272 @@
       padding: 20px;
     }
 
+    /* --- UX POLISH V5 --- */
+    .alert-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      padding: 6px 10px;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      color: #38bdf8;
+      background: rgba(15, 23, 42, 0.72);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .alert-source:hover { background: rgba(14, 116, 144, 0.18); border-color: #38bdf8; }
+    .archive-source-link { color: #38bdf8; font-weight: 700; text-decoration: none; white-space: nowrap; }
+    .archive-source-link:hover { text-decoration: underline; }
+
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 1px 0 rgba(148, 163, 184, 0.06);
+    }
+
+    .brand-title {
+      min-width: max-content;
+    }
+
+    .nav-btn:focus-visible,
+    .form-control:focus-visible,
+    .btn-submit:focus-visible,
+    .alert-card:focus-visible {
+      outline: 2px solid #38bdf8;
+      outline-offset: 2px;
+    }
+
+    .nav-btn {
+      min-height: 44px;
+    }
+
+    .panel-header {
+      min-height: 52px;
+    }
+
+    .alerts-list {
+      scrollbar-width: thin;
+      scrollbar-color: #475569 transparent;
+    }
+
+    .alert-card {
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16);
+    }
+
+    .alert-card:hover {
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+    }
+
+    .alert-title {
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .alert-location {
+      line-height: 1.4;
+      margin-top: 5px;
+    }
+
+    .stats-container,
+    .archive-container,
+    .about-container {
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.10);
+    }
+
+    .stat-card {
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.10);
+    }
+
+    .stats-table th,
+    .archive-table th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    .stats-table th {
+      text-align: left;
+    }
+
+    .stats-table th:nth-child(n+2),
+    .stats-table td:nth-child(n+2) {
+      text-align: right;
+    }
+
+    .stats-table th:first-child,
+    .stats-table td:first-child {
+      text-align: left;
+    }
+
+    .stats-table tbody tr:nth-child(even),
+    .archive-table tbody tr:nth-child(even) {
+      background-color: rgba(30, 41, 59, 0.28);
+    }
+
+    .stats-table tbody tr:hover,
+    .archive-table tbody tr:hover {
+      background-color: rgba(56, 189, 248, 0.06);
+    }
+
+    .city-stats-note {
+      padding: 9px 10px;
+      border-left: 3px solid #475569;
+      background-color: rgba(71, 85, 105, 0.10);
+      border-radius: 4px;
+    }
+
+    .archive-filters {
+      align-items: center;
+    }
+
+    .archive-filters .form-control {
+      min-height: 42px;
+    }
+
+    .form-control {
+      transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+    }
+
+    .form-control:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.12);
+      background-color: #111c30;
+    }
+
+    .btn-submit {
+      transition: transform .15s ease, background-color .2s ease, box-shadow .2s ease;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.18);
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.24);
+    }
+
+    footer {
+      margin-top: 8px;
+    }
+
+    .counter-widget {
+      max-width: 100%;
+    }
+
+    .database-update-bar {
+      color: #94a3b8;
+    }
+
+    @media (max-width: 900px) {
+      .top-header {
+        position: relative;
+        height: auto;
+        min-height: 60px;
+        padding: 8px 14px 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+      }
+
+      .brand-title {
+        padding: 4px 2px 7px;
+      }
+
+      .nav-tabs {
+        width: 100%;
+        height: 48px;
+        overflow-x: auto;
+        scrollbar-width: thin;
+      }
+
+      .nav-btn {
+        flex: 0 0 auto;
+        padding: 0 12px;
+        font-size: 0.75rem;
+      }
+
+      main {
+        padding: 12px;
+      }
+
+      .map-container {
+        min-height: 430px;
+      }
+
+      #map {
+        min-height: 380px;
+      }
+
+      .alerts-sidebar {
+        max-height: none;
+      }
+
+      .archive-container,
+      .stats-container,
+      .about-container {
+        padding: 16px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .brand-title {
+        font-size: 0.78rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-container {
+        margin: 8px auto;
+        padding: 20px;
+      }
+
+      .archive-filters {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .archive-filters .form-control {
+        width: 100% !important;
+        min-width: 0 !important;
+      }
+
+      .counter-widget {
+        width: 100%;
+        justify-content: center;
+        gap: 12px;
+        border-radius: 12px;
+        flex-wrap: wrap;
+      }
+
+      .divider {
+        display: none;
+      }
+
+      .database-update-bar {
+        flex-wrap: wrap;
+        text-align: center;
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
     .tab-content {
       display: none;
     }
@@ -178,9 +445,10 @@
 
     .alert-card.terror { border-left-color: #dc2626; }
     .alert-card.bomb { border-left-color: #f97316; }
+    .alert-card.weapon { border-left-color: #2563eb; }
     .alert-card.knife { border-left-color: #eab308; }
     .alert-card.assault { border-left-color: #a855f7; }
-    .alert-card.other { border-left-color: #38bdf8; }
+    .alert-card.infrastructure { border-left-color: #16a34a; }
 
     .alert-header-row {
       display: flex;
@@ -199,9 +467,10 @@
 
     .tag-terror { background-color: rgba(220, 38, 38, 0.2); color: #fca5a5; }
     .tag-bomb { background-color: rgba(249, 115, 22, 0.2); color: #fdba74; }
+    .tag-weapon { background-color: rgba(37, 99, 235, 0.2); color: #93c5fd; }
     .tag-knife { background-color: rgba(234, 179, 8, 0.2); color: #fef08a; }
     .tag-assault { background-color: rgba(168, 85, 247, 0.2); color: #f0abfc; }
-    .tag-other { background-color: rgba(56, 189, 248, 0.2); color: #7dd3fc; }
+    .tag-infrastructure { background-color: rgba(22, 163, 74, 0.2); color: #86efac; }
 
     .alert-time { font-size: 0.75rem; color: #94a3b8; }
     .alert-title { font-weight: 600; color: #f1f5f9; margin-bottom: 4px; }
@@ -268,6 +537,49 @@
       margin-bottom: 15px;
       text-transform: uppercase;
       letter-spacing: 0.05em;
+    }
+
+    .stats-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+
+    .stats-table th {
+      background-color: #111827;
+      color: #94a3b8;
+      padding: 10px 12px;
+      border-bottom: 1px solid #334155;
+      font-weight: 600;
+    }
+
+    .stats-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #334155;
+      color: #e2e8f0;
+    }
+
+    .stats-table tr:hover {
+      background-color: #182238;
+    }
+
+    .stats-table .count-cell {
+      font-weight: 700;
+      color: #f8fafc;
+      white-space: nowrap;
+    }
+
+    .stats-table .percent-cell {
+      color: #38bdf8;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .stats-empty {
+      color: #94a3b8;
+      padding: 12px 0;
+      font-size: 0.85rem;
     }
 
     .stat-bar-container {
@@ -441,6 +753,476 @@
 
     @keyframes pulse { 75%, 100% { transform: scale(2); opacity: 0; } }
     .divider { width: 1px; height: 16px; background-color: #334155; }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    
+.type-weapon {
+  border-left: 4px solid #7c3aed;
+}
+.type-infrastructure {
+  border-left: 4px solid #2563eb;
+}
+
+
+.city-stats-note {
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+.live-status { transition: opacity .2s ease; }
+    .status-online { color: #16a34a; }
+    .status-loading { color: #ca8a04; }
+    .status-degraded { color: #d97706; }
+    .status-offline { color: #dc2626; }
+  
+    /* --- V6: WYRAŹNY LIFTING INTERFEJSU --- */
+    :root {
+      --etd-panel: #172236;
+      --etd-panel-2: #111b2d;
+      --etd-border: #33445f;
+      --etd-blue: #38bdf8;
+      --etd-blue-strong: #0ea5e9;
+      --etd-muted: #94a3b8;
+      --etd-text: #f8fafc;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 15% 0%, rgba(14,165,233,.08), transparent 28%),
+        radial-gradient(circle at 85% 10%, rgba(30,64,175,.08), transparent 25%),
+        #0b1220;
+    }
+
+    .top-header {
+      background: rgba(15, 23, 42, .96);
+      border-bottom-color: #26364f;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .brand-title {
+      font-size: .9rem;
+      letter-spacing: .08em;
+    }
+
+    .brand-title > span:last-child {
+      color: #e2e8f0;
+    }
+
+    .nav-tabs {
+      gap: 2px;
+    }
+
+    .nav-btn {
+      position: relative;
+      padding: 0 16px;
+      color: #8fa0b8;
+      letter-spacing: .02em;
+    }
+
+    .nav-btn::after {
+      content: '';
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: -1px;
+      height: 3px;
+      border-radius: 3px 3px 0 0;
+      background: transparent;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .nav-btn.active {
+      color: #7dd3fc;
+      background: rgba(56,189,248,.08);
+      border-bottom-color: transparent;
+    }
+
+    .nav-btn.active::after {
+      background: #38bdf8;
+      box-shadow: 0 -2px 12px rgba(56,189,248,.35);
+    }
+
+    main {
+      max-width: 1680px;
+      padding: 24px;
+    }
+
+    #dashboard-tab.active {
+      gap: 18px;
+    }
+
+    .map-container,
+    .alerts-sidebar,
+    .stats-container,
+    .archive-container,
+    .about-container {
+      background: linear-gradient(180deg, #172236 0%, #121c2e 100%);
+      border-color: #33445f;
+      box-shadow: 0 12px 34px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.025);
+    }
+
+    .map-container,
+    .alerts-sidebar {
+      border-radius: 14px;
+    }
+
+    .panel-header {
+      min-height: 56px;
+      padding: 14px 18px;
+      background: linear-gradient(90deg, rgba(30,41,59,.92), rgba(23,34,54,.92));
+      border-bottom-color: #33445f;
+      letter-spacing: .035em;
+    }
+
+    .panel-header > span:first-child {
+      color: #e2e8f0;
+    }
+
+    .map-header-subtitle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border: 1px solid #33445f;
+      border-radius: 999px;
+      background: rgba(15,23,42,.45);
+      font-size: .7rem;
+      color: #94a3b8;
+      white-space: nowrap;
+    }
+
+    .dashboard-strip {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(220px, 1.4fr) repeat(3, minmax(150px, .8fr));
+      gap: 12px;
+      margin-bottom: 0;
+    }
+
+    .dashboard-hero {
+      min-height: 92px;
+      padding: 18px 20px;
+      border: 1px solid #33445f;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(14,165,233,.13), rgba(15,23,42,.75));
+      box-shadow: 0 10px 28px rgba(0,0,0,.16);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .dashboard-hero-kicker {
+      color: #38bdf8;
+      font-size: .68rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .dashboard-hero-title {
+      font-size: 1.15rem;
+      font-weight: 750;
+      color: #f8fafc;
+    }
+
+    .dashboard-hero-subtitle {
+      color: #94a3b8;
+      font-size: .76rem;
+      margin-top: 3px;
+    }
+
+    .dashboard-kpi {
+      min-height: 92px;
+      padding: 14px 16px;
+      border: 1px solid #33445f;
+      border-radius: 14px;
+      background: rgba(15,23,42,.62);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 10px 28px rgba(0,0,0,.14);
+    }
+
+    .dashboard-kpi-icon {
+      width: 38px;
+      height: 38px;
+      flex: 0 0 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: rgba(56,189,248,.10);
+      border: 1px solid rgba(56,189,248,.20);
+      font-size: 1rem;
+    }
+
+    .dashboard-kpi-label {
+      color: #94a3b8;
+      font-size: .68rem;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      font-weight: 700;
+    }
+
+    .dashboard-kpi-value {
+      color: #f8fafc;
+      font-size: 1.25rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-top: 2px;
+    }
+
+    .dashboard-kpi-value.blue { color: #38bdf8; }
+    .dashboard-kpi-value.green { color: #4ade80; }
+    .dashboard-kpi-value.orange { color: #fb923c; }
+
+    .map-legend {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 9px 14px;
+      background: #101a2b;
+      border-top: 1px solid #293a54;
+      color: #cbd5e1;
+      font-size: .68rem;
+    }
+
+    .map-legend-title {
+      color: #64748b;
+      font-weight: 800;
+      letter-spacing: .08em;
+      margin-right: 2px;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      box-shadow: 0 0 8px currentColor;
+    }
+
+    .alerts-sidebar {
+      box-shadow: 0 12px 34px rgba(0,0,0,.20);
+    }
+
+    .alerts-list {
+      padding: 14px;
+      gap: 10px;
+    }
+
+    .alert-card {
+      border-left-width: 4px;
+      border-radius: 9px;
+      padding: 13px 14px;
+      background: rgba(8,15,28,.76);
+      border-top: 1px solid rgba(148,163,184,.08);
+      border-right: 1px solid rgba(148,163,184,.08);
+      border-bottom: 1px solid rgba(148,163,184,.08);
+    }
+
+    .alert-card:hover {
+      transform: translateX(3px);
+      background: #142033;
+      border-top-color: rgba(56,189,248,.15);
+      border-right-color: rgba(56,189,248,.15);
+      border-bottom-color: rgba(56,189,248,.15);
+    }
+
+    .alert-header-row {
+      margin-bottom: 7px;
+    }
+
+    .alert-tag {
+      padding: 3px 7px;
+      border-radius: 4px;
+      font-size: .62rem;
+      letter-spacing: .04em;
+    }
+
+    .alert-time {
+      color: #64748b;
+      font-size: .68rem;
+    }
+
+    .alert-title {
+      font-size: .88rem;
+      font-weight: 650;
+      color: #f1f5f9;
+    }
+
+    .alert-location {
+      color: #8fa0b8;
+      font-size: .74rem;
+    }
+
+    /* STATYSTYKI V6 */
+    .stats-container {
+      width: 100%;
+      padding: 26px;
+      border-radius: 16px;
+    }
+
+    .stats-heading-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .stats-heading-badge {
+      padding: 6px 10px;
+      border: 1px solid #33445f;
+      border-radius: 7px;
+      color: #7dd3fc;
+      background: rgba(56,189,248,.06);
+      font-size: .7rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .stats-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stats-kpi {
+      padding: 16px;
+      border: 1px solid #33445f;
+      border-radius: 12px;
+      background: #101a2b;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stats-kpi::after {
+      content: '';
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      right: -24px;
+      top: -28px;
+      border-radius: 50%;
+      background: rgba(56,189,248,.08);
+    }
+
+    .stats-kpi-label { color: #94a3b8; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; }
+    .stats-kpi-value { color: #f8fafc; font-size: 1.55rem; font-weight: 800; line-height: 1.15; margin-top: 4px; }
+    .stats-kpi-meta { color: #64748b; font-size: .7rem; margin-top: 4px; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 14px;
+    }
+
+    .stat-card {
+      border: 1px solid #33445f;
+      border-radius: 12px;
+      background: rgba(15,23,42,.52);
+      padding: 16px;
+      box-shadow: none;
+    }
+
+    .stat-card:nth-child(3) {
+      grid-column: 1 / -1;
+    }
+
+    .stat-card-title {
+      color: #cbd5e1;
+      font-size: .76rem;
+      letter-spacing: .09em;
+      margin-bottom: 13px;
+    }
+
+    .stats-table th {
+      background: #101a2b;
+      color: #7f90a8;
+      font-size: .66rem;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+
+    .stats-table td {
+      font-size: .8rem;
+      padding: 9px 10px;
+    }
+
+    .stat-bar-item {
+      padding: 10px 0;
+    }
+
+    .stat-bar-header {
+      margin-bottom: 6px;
+      font-size: .8rem;
+    }
+
+    .stat-bar-bg {
+      background: #0b1424;
+      border: 1px solid #25364f;
+      height: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .stat-bar-fill {
+      border-radius: 999px;
+      box-shadow: 0 0 10px rgba(255,255,255,.10);
+    }
+
+    .archive-container {
+      border-radius: 16px;
+      padding: 26px;
+    }
+
+    .about-container {
+      border-radius: 16px;
+    }
+
+    @media (max-width: 1100px) {
+      .dashboard-strip { grid-template-columns: 1fr 1fr 1fr; }
+      .dashboard-hero { grid-column: 1 / -1; }
+      .stats-kpi-grid { grid-template-columns: repeat(2,1fr); }
+    }
+
+    @media (max-width: 700px) {
+      main { padding: 12px; }
+      .dashboard-strip { grid-template-columns: 1fr; }
+      .dashboard-hero { grid-column: auto; }
+      .stats-kpi-grid { grid-template-columns: 1fr 1fr; }
+      .stats-heading-row { align-items: flex-start; flex-direction: column; gap: 10px; }
+      .stats-container, .archive-container { padding: 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .stats-kpi-grid { grid-template-columns: 1fr; }
+      .dashboard-kpi { min-height: 78px; }
+      .dashboard-hero { min-height: 82px; }
+      .map-header-subtitle { display: none; }
+    }
+
   </style>
 </head>
 <body>
@@ -460,7 +1242,7 @@
         <span>📊 DASHBOARD</span>
       </button>
       <button class="nav-btn" onclick="switchTab(event, 'stats')">
-        <span>📈 STATYSTYKI MIAST</span>
+        <span>📈 STATYSTYKI</span>
       </button>
       <button class="nav-btn" onclick="switchTab(event, 'archive')">
         <span>📁 ARCHIWUM</span>
@@ -481,18 +1263,47 @@
   <main>
     <!-- TAB 1: DASHBOARD -->
     <div id="dashboard-tab" class="tab-content active">
+      <div class="dashboard-strip">
+        <div class="dashboard-hero">
+          <div class="dashboard-hero-kicker">CENTRUM MONITORINGU</div>
+          <div class="dashboard-hero-title">Europejski monitoring zagrożeń</div>
+          <div class="dashboard-hero-subtitle">Bieżący obraz alertów wykrytych przez ETD.</div>
+        </div>
+        <div class="dashboard-kpi">
+          <div class="dashboard-kpi-icon">⚠️</div>
+          <div><div class="dashboard-kpi-label">Aktywne alerty</div><div id="dashboard-alert-count" class="dashboard-kpi-value blue">—</div></div>
+        </div>
+        <div class="dashboard-kpi">
+          <div class="dashboard-kpi-icon">🌍</div>
+          <div><div class="dashboard-kpi-label">Państwa</div><div id="dashboard-country-count" class="dashboard-kpi-value green">—</div></div>
+        </div>
+        <div class="dashboard-kpi">
+          <div class="dashboard-kpi-icon">🎯</div>
+          <div><div class="dashboard-kpi-label">Kategorie</div><div id="dashboard-type-count" class="dashboard-kpi-value orange">—</div></div>
+        </div>
+      </div>
+
       <section class="map-container">
         <div class="panel-header">
           <span>MAPA ZAGROŻEŃ W CZASIE RZECZYWISTYM</span>
-          <span style="font-size: 0.75rem; color: #94a3b8;">Europa / Obszar Monitorowany</span>
+          <span class="map-header-subtitle">● Europa / Obszar monitorowany</span>
         </div>
         <div id="map"></div>
+        <div class="map-legend">
+          <span class="map-legend-title">KATEGORIE</span>
+          <span class="legend-item"><span class="legend-dot" style="color:#dc2626;background:#dc2626"></span>Terror</span>
+          <span class="legend-item"><span class="legend-dot" style="color:#f97316;background:#f97316"></span>Bomb</span>
+          <span class="legend-item"><span class="legend-dot" style="color:#2563eb;background:#2563eb"></span>Weapon</span>
+          <span class="legend-item"><span class="legend-dot" style="color:#eab308;background:#eab308"></span>Knife</span>
+          <span class="legend-item"><span class="legend-dot" style="color:#a855f7;background:#a855f7"></span>Assault</span>
+          <span class="legend-item"><span class="legend-dot" style="color:#16a34a;background:#16a34a"></span>Infrastructure</span>
+        </div>
       </section>
 
       <aside class="alerts-sidebar">
         <div class="panel-header">
           <span>OSTATNIE ALERTY</span>
-          <span style="font-size: 0.75rem; color: #ef4444; font-weight: 700;">● NA ŻYWO</span>
+          <span class="live-status status-loading" style="font-size: 0.75rem; font-weight: 700;">● ŁĄCZENIE</span>
         </div>
         <div class="alerts-list" id="alerts-container">
           <!-- Generowanie wpisów -->
@@ -500,16 +1311,59 @@
       </aside>
     </div>
 
-    <!-- TAB 2: STATYSTYKI MIAST -->
+    <!-- TAB 2: STATYSTYKI -->
     <div id="stats-tab" class="tab-content">
       <div class="stats-container">
-        <h2 class="form-title" style="margin-bottom: 8px;">Analiza Powtarzalności Zagrożeń</h2>
-        <p class="form-subtitle">Raport miast oraz obszarów europejskich o największym natężeniu i powtarzalności alertów.</p>
+        <div class="stats-heading-row">
+          <div>
+            <h2 class="form-title" style="margin-bottom: 6px;">Statystyki zagrożeń</h2>
+            <p class="form-subtitle" style="margin-bottom:0;">Rozkład alertów według państw, miast oraz kategorii zagrożeń.</p>
+          </div>
+          <div class="stats-heading-badge">ETD · LIVE DATA</div>
+        </div>
+
+        <div class="stats-kpi-grid">
+          <div class="stats-kpi"><div class="stats-kpi-label">Wszystkie alerty</div><div id="stats-total-count" class="stats-kpi-value">—</div><div class="stats-kpi-meta">rekordów w bieżącym zestawie</div></div>
+          <div class="stats-kpi"><div class="stats-kpi-label">Państwa</div><div id="stats-country-count" class="stats-kpi-value">—</div><div class="stats-kpi-meta">unikalnych państw</div></div>
+          <div class="stats-kpi"><div class="stats-kpi-label">Miasta</div><div id="stats-city-count" class="stats-kpi-value">—</div><div class="stats-kpi-meta">jednoznacznie określonych</div></div>
+          <div class="stats-kpi"><div class="stats-kpi-label">Kategorie</div><div id="stats-type-count" class="stats-kpi-value">—</div><div class="stats-kpi-meta">aktywnych typów zagrożeń</div></div>
+        </div>
 
         <div class="stats-grid">
           <div class="stat-card">
-            <div class="stat-card-title">🔴 Najbardziej zagrożone miasta</div>
-            <div class="stat-bar-container" id="city-stats-list"></div>
+            <div class="stat-card-title">🌍 Statystyki Państw</div>
+            <div class="table-responsive">
+              <table class="stats-table">
+                <caption class="sr-only">Statystyki alertów według państw</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Państwo</th>
+                    <th scope="col">Alerty</th>
+                    <th scope="col">Udział</th>
+                  </tr>
+                </thead>
+                <tbody id="country-stats-table"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-title">🏙️ Statystyki Miast</div>
+            <div class="table-responsive">
+              <table class="stats-table">
+                <caption class="sr-only">Statystyki alertów według miast</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Miasto</th>
+                    <th scope="col">Państwo</th>
+                    <th scope="col">Alerty</th>
+                    <th scope="col">Udział</th>
+                  </tr>
+                </thead>
+                <tbody id="city-stats-table"></tbody>
+              </table>
+            </div>
+            <div class="city-stats-note" id="city-stats-note"></div>
           </div>
 
           <div class="stat-card">
@@ -531,24 +1385,28 @@
             <option value="all">Wszystkie kategorie</option>
             <option value="terror">Terroryzm</option>
             <option value="bomb">Zagrożenie bombowe</option>
-            <option value="knife">Narzędzie niebezpieczne</option>
-            <option value="assault">Napaść / Gwałt</option>
+            <option value="weapon">Broń / atak z użyciem broni</option>
+            <option value="knife">Atak z użyciem noża / narzędzia niebezpiecznego</option>
+            <option value="assault">Napaść / Przemoc</option>
+            <option value="infrastructure">Zagrożenie infrastruktury krytycznej</option>
           </select>
         </div>
 
         <div class="table-responsive">
           <table class="archive-table">
+            <caption class="sr-only">Archiwum alertów i incydentów</caption>
             <thead>
               <tr>
-                <th>Data / Czas</th>
-                <th>Kategoria</th>
-                <th>Tytuł zdarzenia</th>
-                <th>Lokalizacja</th>
-                <th>Współrzędne</th>
+                <th scope="col">Data / Czas</th>
+                <th scope="col">Kategoria</th>
+                <th scope="col">Tytuł zdarzenia</th>
+                <th scope="col">Lokalizacja</th>
+                <th scope="col">Współrzędne</th>
+                              <th scope="col">Źródło</th>
               </tr>
             </thead>
             <tbody id="archive-table-body">
-              <tr><td colspan="5" style="text-align:center;">Ładowanie archiwum...</td></tr>
+              <tr><td colspan="6" style="text-align:center;">Ładowanie archiwum...</td></tr>
             </tbody>
           </table>
         </div>
@@ -579,12 +1437,14 @@
 
           <div class="about-card">
             <h3>🛡️ Klasyfikacja Zagrożeń</h3>
-            <p>System kategoryzuje incydenty według czterech kluczowych poziomów ryzyka:</p>
+            <p>System kategoryzuje incydenty według sześciu klas zagrożeń:</p>
             <ul>
-              <li><strong style="color:#fca5a5;">Terroryzm</strong> – Incydenty o charakterze masowym</li>
-              <li><strong style="color:#fdba74;">Zagrożenie bombowe</strong> – Ewakuacje i podejrzenia ładunków</li>
-              <li><strong style="color:#fef08a;">Narzędzie niebezpieczne</strong> – Ataki z użyciem ostrych narzędzi</li>
-              <li><strong style="color:#f0abfc;">Napaść / Gwałt</strong> – Poważne przestępstwa fizyczne</li>
+              <li><strong style="color:#fca5a5;">Terroryzm</strong> – Rzeczywiste akty terrorystyczne, próby zamachu i bezpośrednio związane zdarzenia operacyjne</li>
+              <li><strong style="color:#fdba74;">Zagrożenie bombowe</strong> – Bomby, podejrzane ładunki, materiały wybuchowe i realne zagrożenia bombowe</li>
+              <li><strong style="color:#93c5fd;">Broń / atak z użyciem broni</strong> – Strzelaniny, broń palna, drony użyte jako broń i inne użycie broni</li>
+              <li><strong style="color:#fef08a;">Atak z użyciem noża / narzędzia niebezpiecznego</strong> – Ataki z użyciem noża lub ostrego/niebezpiecznego narzędzia</li>
+              <li><strong style="color:#f0abfc;">Napaść / Przemoc</strong> – Konkretne napaści, pobicia, przemoc lub przestępstwa seksualne</li>
+              <li><strong style="color:#86efac;">Zagrożenie infrastruktury krytycznej</strong> – Ataki, sabotaż, poważne uszkodzenia lub bezpośrednie zagrożenia infrastruktury krytycznej</li>
             </ul>
           </div>
 
@@ -686,48 +1546,114 @@
   </footer>
 
   <!-- OSOBNY WIERSZ: AKTUALIZACJA BAZY -->
-  <div style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.75rem; opacity: 0.8; margin-top: 6px; padding-bottom: 12px;">
+  <div class="database-update-bar" style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.75rem; opacity: 0.8; margin-top: 6px; padding-bottom: 12px;">
     <span id="status-dot" style="width: 8px; height: 8px; background-color: #22c55e; border-radius: 50%; display: inline-block;"></span>
     <span style="opacity: 0.4;">|</span>
     <span>Ostatnia aktualizacja bazy: <strong id="last-update-time" style="color: inherit;">Ładowanie...</strong></span>
   </div>
 
+  <div class="frontend-version" style="text-align: center; font-size: 0.72rem; opacity: 0.55; padding: 4px 0 14px;">
+    Frontend: V2.5.8
+  </div>
+
   <!-- SKRYPTY -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
+function hasPreciseMapLocation(item) {
+  if (!item) return false;
+
+  const city = String(item.city || '').trim();
+  const latRaw = item.lat;
+  const lngRaw = item.lng;
+
+  if (!city || latRaw === null || latRaw === undefined ||
+      lngRaw === null || lngRaw === undefined) {
+    return false;
+  }
+
+  const lat = Number(latRaw);
+  const lng = Number(lngRaw);
+
+  return Number.isFinite(lat) &&
+    Number.isFinite(lng) &&
+    !(lat === 0 && lng === 0) &&
+    lat >= -90 && lat <= 90 &&
+    lng >= -180 && lng <= 180;
+}
+
+function hasValidCoordinates(latValue, lngValue) {
+  if (latValue === null || latValue === undefined ||
+      lngValue === null || lngValue === undefined) {
+    return false;
+  }
+  const lat = Number(latValue);
+  const lng = Number(lngValue);
+  return Number.isFinite(lat) &&
+    Number.isFinite(lng) &&
+    !(lat === 0 && lng === 0) &&
+    lat >= -90 && lat <= 90 &&
+    lng >= -180 && lng <= 180;
+}
+
     const WEB3FORMS_KEY = 'd51f7c74-6e19-4f0a-bd21-8537bed68ffa';
 
     let map = null;
     let markersGroup = null;
     let allAlertsData = [];
+    let dataConnectionState = 'loading';
 
-    const fallbackAlerts = [
-      { id: 1, title: 'Podwyższony alert antyterrorystyczny', type: 'terror', type_name: 'Terroryzm', location: 'Paryż, Francja', lat: 48.8566, lng: 2.3522, created_at: new Date(Date.now() - 600000).toISOString() },
-      { id: 2, title: 'Ewakuacja dworca głównego', type: 'bomb', type_name: 'Zagrożenie bombowe', location: 'Berlin, Niemcy', lat: 52.5200, lng: 13.4050, created_at: new Date(Date.now() - 1500000).toISOString() },
-      { id: 3, title: 'Incydent z użyciem noża przy metrze', type: 'knife', type_name: 'Narzędzie niebezpieczne', location: 'Londyn, Wielka Britania', lat: 51.5074, lng: -0.1278, created_at: new Date(Date.now() - 3600000).toISOString() },
-      { id: 4, title: 'Napaść w parku miejskim', type: 'assault', type_name: 'Napaść / Gwałt', location: 'Warszawa, Polska', lat: 52.2297, lng: 21.0122, created_at: new Date(Date.now() - 7200000).toISOString() }
-    ];
-
-    function normalizeType(typeStr) {
-      if (!typeStr) return 'other';
-      const t = String(typeStr).toLowerCase();
-      if (t.includes('terror')) return 'terror';
-      if (t.includes('bomb')) return 'bomb';
-      if (t.includes('noż') || t.includes('narzędzie') || t.includes('knife')) return 'knife';
-      if (t.includes('napaść') || t.includes('gwałt') || t.includes('assault')) return 'assault';
-      return 'other';
+    function setLiveStatus(state) {
+      dataConnectionState = state;
+      const statusEl = document.querySelector('.live-status');
+      if (!statusEl) return;
+      const states = {
+        loading: { text: '● ŁĄCZENIE', className: 'status-loading' },
+        online: { text: '● NA ŻYWO', className: 'status-online' },
+        degraded: { text: '● OGRANICZONA FUNKCJONALNOŚĆ', className: 'status-degraded' },
+        offline: { text: '● BRAK POŁĄCZENIA', className: 'status-offline' }
+      };
+      const current = states[state] || states.offline;
+      statusEl.textContent = current.text;
+      statusEl.className = `live-status ${current.className}`;
     }
+
+
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/\"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function normalizeType(value) {
+  const t = String(value || '').toLowerCase().trim();
+
+  if (t === 'terror' || t.includes('terror')) return 'terror';
+  if (t === 'bomb' || t.includes('bomb') || t.includes('explosive') || t.includes('ied')) return 'bomb';
+  if (t === 'weapon' || t.includes('weapon') || t.includes('broń')) return 'weapon';
+  if (t === 'knife' || t.includes('knife') || t.includes('nóż') || t.includes('noż')) return 'knife';
+  if (t === 'assault' || t.includes('assault') || t.includes('napad') || t.includes('gwałt')) return 'assault';
+  if (t === 'infrastructure' || t.includes('infrastructure') || t.includes('infrastrukt')) return 'infrastructure';
+
+  return 'assault';
+}
 
     function getCategoryColor(type) {
       const normalized = normalizeType(type);
       switch (normalized) {
         case 'terror': return '#dc2626';
         case 'bomb': return '#f97316';
+        case 'weapon': return '#2563eb';
         case 'knife': return '#eab308';
         case 'assault': return '#a855f7';
-        default: return '#38bdf8';
+        case 'infrastructure': return '#16a34a';
+        default: return '#64748b';
       }
     }
 
@@ -825,27 +1751,56 @@
 
         if (data !== null && data !== undefined) {
           sessionStorage.setItem('page_visited', 'true');
-          document.getElementById('total-views').innerText = Number(data).toLocaleString('pl-PL');
+          const viewsEl = document.getElementById('total-views');
+          if (viewsEl) {
+            viewsEl.innerText = Number(data).toLocaleString('pl-PL');
+          }
         }
       } catch (err) {
         console.error('Wyjątek sieciowy:', err);
       }
     }
 
+
+    function getSourceName(url) {
+      if (!url) return 'Źródło';
+      try {
+        const host = new URL(url).hostname.toLowerCase().replace(/^www\./, '');
+        const names = {
+          'wiadomosci.wp.pl': 'WP Wiadomości',
+          'tagesschau.de': 'Tagesschau',
+          'derstandard.at': 'Der Standard',
+          'vrt.be': 'VRT NWS',
+          'lemonde.fr': 'Le Monde'
+        };
+        return names[host] || host;
+      } catch (_) {
+        return 'Źródło';
+      }
+    }
+
     async function loadAlerts() {
+      setLiveStatus('loading');
       try {
         const { data, error } = await supabaseClient
           .from('alerts')
           .select('*')
           .order('created_at', { ascending: false });
 
-        if (error || !data || data.length === 0) {
-          throw new Error('Fallback trigger');
-        }
+        if (error) throw error;
 
-        allAlertsData = data;
+        allAlertsData = data || [];
+        setLiveStatus('online');
       } catch (err) {
-        allAlertsData = fallbackAlerts;
+        setLiveStatus('offline');
+        console.error('Błąd pobierania alertów:', err);
+        allAlertsData = [];
+        const container = document.getElementById('alerts-container');
+        if (container) {
+          container.innerHTML = '<div style="padding:16px;color:#fca5a5;">Nie udało się pobrać aktualnych alertów.</div>';
+        }
+        const updateEl = document.getElementById('last-update-time');
+        if (updateEl) updateEl.innerText = 'Błąd odczytu';
       }
 
       renderMapAndSidebar(allAlertsData);
@@ -853,24 +1808,40 @@
       renderStatistics(allAlertsData);
 
       if (allAlertsData.length > 0) {
-        const dateVal = allAlertsData[0].pub_date || allAlertsData[0].created_at;
+        const dateVal = allAlertsData.reduce((latest, item) => {
+            const value = item?.created_at;
+            if (!value) return latest;
+            if (!latest) return value;
+            return new Date(value) > new Date(latest) ? value : latest;
+          }, null);
         const lastUpdate = dateVal ? new Date(dateVal).toLocaleString('pl-PL') : 'Brak daty';
-        document.getElementById('last-update-time').innerText = lastUpdate;
+        const updateEl = document.getElementById('last-update-time');
+        if (updateEl) updateEl.innerText = lastUpdate;
       }
     }
 
     function renderMapAndSidebar(alerts) {
       const alertsContainer = document.getElementById('alerts-container');
+      if (!alertsContainer || !markersGroup) return;
       alertsContainer.innerHTML = '';
       markersGroup.clearLayers();
+
+      if (alerts.length === 0) {
+        alertsContainer.innerHTML = '<div style="padding:16px;color:#94a3b8;">Brak aktywnych alertów.</div>';
+        return;
+      }
 
       alerts.forEach(item => {
         const normType = normalizeType(item.type_name || item.type);
         const locationText = item.location || item.location_name || 'Brak dokładnej lokalizacji';
         const itemDate = item.pub_date || item.created_at;
 
-        if (item.lat !== null && item.lng !== null && !isNaN(item.lat) && !isNaN(item.lng)) {
-          const marker = L.circleMarker([item.lat, item.lng], {
+        const lat = Number(item.lat);
+        const lng = Number(item.lng);
+        const hasCoordinates = hasPreciseMapLocation(item);
+
+        if (hasCoordinates) {
+          const marker = L.circleMarker([lat, lng], {
             radius: 8,
             fillColor: getCategoryColor(normType),
             color: '#ffffff',
@@ -880,27 +1851,49 @@
           }).addTo(markersGroup);
 
           marker.bindPopup(`
-            <strong style="color: #0f172a;">${item.type_name || item.type || 'Alert'}: ${item.title}</strong><br>
-            <span style="color: #475569;">Lokalizacja: ${locationText}</span>
+            <strong style="color: #0f172a;">${escapeHtml(item.type_name || item.type || 'Alert')}: ${escapeHtml(item.title)}</strong><br>
+            <span style="color: #475569;">Lokalizacja: ${escapeHtml(locationText)}</span>
           `);
         }
 
         const card = document.createElement('div');
         card.className = `alert-card ${normType}`;
+        card.tabIndex = 0;
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', `Otwórz lokalizację alertu: ${item.title || 'alert'}`);
         card.innerHTML = `
           <div class="alert-header-row">
-            <span class="alert-tag tag-${normType}">${item.type_name || item.type || 'Inne'}</span>
+            <span class="alert-tag tag-${normType}">${escapeHtml(item.type_name || item.type || 'Inne')}</span>
             <span class="alert-time">${itemDate ? new Date(itemDate).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : ''}</span>
           </div>
-          <div class="alert-title">${item.title}</div>
-          <div class="alert-location">📍 ${locationText}</div>
-        `;
+          <div class="alert-title">${escapeHtml(item.title)}</div>
+          <div class="alert-location">📍 ${escapeHtml(locationText)}</div>
+        
+          ${item.source_url ? `
+            <a class="alert-source"
+               href="${escapeHtml(item.source_url)}"
+               target="_blank"
+               rel="noopener noreferrer">
+              ↗ ${escapeHtml(getSourceName(item.source_url))}
+            </a>
+          ` : ''}
+`;
 
-        card.addEventListener('click', () => {
-          if (item.lat && item.lng) {
-            map.flyTo([item.lat, item.lng], 10, { duration: 1.5 });
+        const focusHandler = () => {
+          if (hasCoordinates && map) {
+            map.flyTo([lat, lng], 10, { duration: 1.5 });
+          }
+        };
+
+        card.addEventListener('click', focusHandler);
+        card.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            focusHandler();
           }
         });
+
+
 
         alertsContainer.appendChild(card);
       });
@@ -908,10 +1901,11 @@
 
     function renderArchiveTable(alerts) {
       const tbody = document.getElementById('archive-table-body');
+      if (!tbody) return;
       tbody.innerHTML = '';
 
       if (alerts.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Brak archiwalnych wpisów.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">Brak archiwalnych wpisów.</td></tr>';
         return;
       }
 
@@ -920,69 +1914,197 @@
         const itemDate = item.pub_date || item.created_at;
         const dateFormatted = itemDate ? new Date(itemDate).toLocaleString('pl-PL') : 'Brak';
         const locationText = item.location || item.location_name || 'Brak danych';
-        const coordsText = (item.lat && item.lng) ? `${Number(item.lat).toFixed(4)}, ${Number(item.lng).toFixed(4)}` : 'Brak geolokalizacji';
+        const coordsText = hasPreciseMapLocation(item) ? `${Number(item.lat).toFixed(4)}, ${Number(item.lng).toFixed(4)}` : 'Brak geolokalizacji';
 
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td>${dateFormatted}</td>
-          <td><span class="alert-tag tag-${normType}">${item.type_name || item.type || 'Inne'}</span></td>
-          <td style="font-weight:600; color:#f8fafc;">${item.title}</td>
-          <td>📍 ${locationText}</td>
-          <td style="color:#64748b; font-family:monospace;">${coordsText}</td>
-        `;
+          <td>${escapeHtml(dateFormatted)}</td>
+          <td><span class="alert-tag tag-${normType}">${escapeHtml(item.type_name || item.type || 'Inne')}</span></td>
+          <td style="font-weight:600; color:#f8fafc;">${escapeHtml(item.title)}</td>
+          <td>📍 ${escapeHtml(locationText)}</td>
+          <td style="color:#64748b; font-family:monospace;">${escapeHtml(coordsText)}</td>
+        
+          <td>
+            ${item.source_url ? `
+              <a class="archive-source-link"
+                 href="${escapeHtml(item.source_url)}"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                ↗ ${escapeHtml(getSourceName(item.source_url))}
+              </a>
+            ` : '<span style="color:#64748b;">brak</span>'}
+          </td>
+`;
         tbody.appendChild(tr);
       });
     }
 
     function renderStatistics(alerts) {
-      const cityList = document.getElementById('city-stats-list');
+      const countryTable = document.getElementById('country-stats-table');
+      const cityTable = document.getElementById('city-stats-table');
+      const cityNote = document.getElementById('city-stats-note');
       const typeList = document.getElementById('type-stats-list');
-      if (!cityList || !typeList) return;
 
+      if (!countryTable || !cityTable || !cityNote || !typeList) return;
+
+      const countryCounts = {};
       const cityCounts = {};
       const typeCounts = {};
+      let alertsWithoutCity = 0;
+
+      const getCountryName = (countryCode) => {
+        const code = String(countryCode || '').trim().toUpperCase();
+        if (!code) return 'Nieokreślone';
+
+        try {
+          if (typeof Intl !== 'undefined' && Intl.DisplayNames) {
+            const displayNames = new Intl.DisplayNames(['pl'], { type: 'region' });
+            return displayNames.of(code) || code;
+          }
+        } catch (_) {}
+
+        const fallback = {
+          PL: 'Polska',
+          DE: 'Niemcy',
+          UA: 'Ukraina',
+          SA: 'Arabia Saudyjska',
+          FR: 'Francja',
+          BE: 'Belgia',
+          AT: 'Austria',
+          NL: 'Niderlandy',
+          HR: 'Chorwacja',
+          GB: 'Wielka Brytania',
+          MC: 'Monako'
+        };
+        return fallback[code] || code;
+      };
 
       alerts.forEach(item => {
-        const loc = item.location || item.location_name || 'Nieznane';
-        const city = loc.split(',')[0].trim();
-        cityCounts[city] = (cityCounts[city] || 0) + 1;
+        const countryCode = String(item.country || '').trim().toUpperCase();
+        const countryKey = countryCode || 'UNKNOWN';
+        if (!countryCounts[countryKey]) {
+          countryCounts[countryKey] = {
+            name: getCountryName(countryCode),
+            count: 0
+          };
+        }
+        countryCounts[countryKey].count += 1;
 
-        const typeName = item.type_name || item.type || 'Inne';
-        typeCounts[typeName] = (typeCounts[typeName] || 0) + 1;
+        // Miasto tylko z jednoznacznego pola city.
+        // Kraj, region i ogólna lokalizacja nigdy nie są traktowane jako miasto.
+        const city = String(item.city || '').trim();
+        if (city) {
+          const cityKey = `${city}||${countryKey}`;
+          if (!cityCounts[cityKey]) {
+            cityCounts[cityKey] = {
+              city,
+              country: getCountryName(countryCode),
+              count: 0
+            };
+          }
+          cityCounts[cityKey].count += 1;
+        } else {
+          alertsWithoutCity += 1;
+        }
+
+        const normalizedType = normalizeType(item.type);
+        const typeName = item.type_name || {
+          terror: 'Terroryzm',
+          bomb: 'Zagrożenie bombowe',
+          weapon: 'Broń / atak z użyciem broni',
+          knife: 'Atak z użyciem noża / narzędzia niebezpiecznego',
+          assault: 'Napaść / Przemoc',
+          infrastructure: 'Zagrożenie infrastruktury krytycznej'
+        }[normalizedType] || normalizedType;
+
+        if (!typeCounts[normalizedType]) {
+          typeCounts[normalizedType] = { name: typeName, count: 0 };
+        }
+        typeCounts[normalizedType].count += 1;
       });
 
       const total = alerts.length || 1;
 
-      const createBarHtml = (label, count) => {
+      const statsTotal = document.getElementById('stats-total-count');
+      const statsCountries = document.getElementById('stats-country-count');
+      const statsCities = document.getElementById('stats-city-count');
+      const statsTypes = document.getElementById('stats-type-count');
+      if (statsTotal) statsTotal.textContent = alerts.length.toLocaleString('pl-PL');
+      if (statsCountries) statsCountries.textContent = Object.keys(countryCounts).filter(key => key !== 'UNKNOWN').length.toLocaleString('pl-PL');
+      if (statsCities) statsCities.textContent = Object.keys(cityCounts).length.toLocaleString('pl-PL');
+      if (statsTypes) statsTypes.textContent = Object.keys(typeCounts).length.toLocaleString('pl-PL');
+
+      const dashboardAlertCount = document.getElementById('dashboard-alert-count');
+      const dashboardCountryCount = document.getElementById('dashboard-country-count');
+      const dashboardTypeCount = document.getElementById('dashboard-type-count');
+      if (dashboardAlertCount) dashboardAlertCount.textContent = alerts.length.toLocaleString('pl-PL');
+      if (dashboardCountryCount) dashboardCountryCount.textContent = Object.keys(countryCounts).filter(key => key !== 'UNKNOWN').length.toLocaleString('pl-PL');
+      if (dashboardTypeCount) dashboardTypeCount.textContent = Object.keys(typeCounts).length.toLocaleString('pl-PL');
+
+      const countryRows = Object.values(countryCounts)
+        .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, 'pl'))
+        .map(data => {
+          const percent = Math.round((data.count / total) * 100);
+          return `
+            <tr>
+              <td>${escapeHtml(data.name)}</td>
+              <td class="count-cell">${data.count}</td>
+              <td class="percent-cell">${percent}%</td>
+            </tr>
+          `;
+        }).join('');
+
+      countryTable.innerHTML = countryRows ||
+        '<tr><td colspan="3" class="stats-empty">Brak danych.</td></tr>';
+
+      const cityRows = Object.values(cityCounts)
+        .sort((a, b) => b.count - a.count || a.city.localeCompare(b.city, 'pl'))
+        .map(data => {
+          const percent = Math.round((data.count / total) * 100);
+          return `
+            <tr>
+              <td>${escapeHtml(data.city)}</td>
+              <td>${escapeHtml(data.country)}</td>
+              <td class="count-cell">${data.count}</td>
+              <td class="percent-cell">${percent}%</td>
+            </tr>
+          `;
+        }).join('');
+
+      cityTable.innerHTML = cityRows ||
+        '<tr><td colspan="4" class="stats-empty">Brak alertów z jednoznacznie określonym miastem.</td></tr>';
+
+      cityNote.textContent = alertsWithoutCity > 0
+        ? `${alertsWithoutCity} ${alertsWithoutCity === 1 ? 'alert nie ma' : 'alerty nie mają'} jednoznacznie określonego miasta i nie są uwzględniane w statystyce miast.`
+        : '';
+
+      const createBarHtml = (label, count, color = '#38bdf8') => {
         const percent = Math.round((count / total) * 100);
         return `
           <div class="stat-bar-item">
             <div class="stat-bar-header">
-              <span>${label}</span>
-              <span style="color: #38bdf8; font-weight: 600;">${count} (${percent}%)</span>
+              <span>${escapeHtml(label)}</span>
+              <span style="color: ${color}; font-weight: 600;">${count} (${percent}%)</span>
             </div>
             <div class="stat-bar-bg">
-              <div class="stat-bar-fill" style="width: ${percent}%;"></div>
+              <div class="stat-bar-fill" style="width: ${percent}%; background-color: ${color};"></div>
             </div>
           </div>
         `;
       };
 
-      cityList.innerHTML = Object.entries(cityCounts)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 5)
-        .map(([city, count]) => createBarHtml(city, count))
-        .join('');
-
       typeList.innerHTML = Object.entries(typeCounts)
-        .sort((a, b) => b[1] - a[1])
-        .map(([type, count]) => createBarHtml(type, count))
+        .sort((a, b) => b[1].count - a[1].count)
+        .map(([type, data]) => createBarHtml(data.name, data.count, getCategoryColor(type)))
         .join('');
     }
 
     function filterArchive() {
-      const searchValue = document.getElementById('archive-search').value.toLowerCase();
-      const typeValue = document.getElementById('archive-type-filter').value;
+      const searchInput = document.getElementById('archive-search');
+      const typeFilter = document.getElementById('archive-type-filter');
+      if (!searchInput || !typeFilter) return;
+      const searchValue = searchInput.value.toLowerCase();
+      const typeValue = typeFilter.value;
 
       const filtered = allAlertsData.filter(item => {
         const titleMatch = item.title ? item.title.toLowerCase().includes(searchValue) : false;
@@ -1005,349 +2127,5 @@
       updatePageViews();
     });
   </script>
-  <!-- Wklej ten fragment tuż przed zamykającym tagiem </body> w index.html -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  // 1. KONFIGURACJA SUPABASE (podmień na swoje dane, jeśli jeszcze ich tu nie ma)
-  const SUPABASE_URL = 'https://TWOJ-PROJECT-ID.supabase.co';
-  const SUPABASE_ANON_KEY = 'TWOJ_PUBLIC_ANON_KEY';
-  
-  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  // 2. POBIERANIE CZASU OSTATNIEJ INGESTII BOTA (po `created_at`)
-  async function fetchLastDatabaseUpdate() {
-    const updateElement = document.getElementById('last-update');
-    if (!updateElement) return;
-
-    try {
-      const { data, error } = await supabase
-        .from('alerts')
-        .select('created_at')
-        .order('created_at', { ascending: false })
-        .limit(1)
-        .maybeSingle();
-
-      if (error) throw error;
-
-      if (data && data.created_at) {
-        const dateObj = new Date(data.created_at);
-        // Formatowanie daty na polski format: DD.MM.YYYY, HH:MM:SS
-        updateElement.innerText = dateObj.toLocaleString('pl-PL', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit'
-        });
-      } else {
-        updateElement.innerText = 'Brak wpisów w bazie';
-      }
-    } catch (err) {
-      console.error('Błąd pobierania czasu ostatniej aktualizacji:', err.message);
-      updateElement.innerText = 'Błąd odczytu';
-    }
-  }
-
-  // 3. LICZNIK ODWIEDZIN (Izolowany blok wywołania RPC z fallbackiem)
-  async function updateAndFetchCounter() {
-    const counterElement = document.getElementById('views-counter');
-    if (!counterElement) return;
-
-    try {
-      // Wywołanie funkcji RPC w Supabase
-      const { data: newCount, error: rpcError } = await supabase.rpc('increment_page_views');
-
-      if (rpcError) {
-        console.warn('Nie udało się zwiększyć licznika (RPC Error):', rpcError.message);
-        
-        // Fallback: Jeśli RPC wyrzuci błąd, tylko odczytujemy aktualny stan z tabeli
-        const { data: fallbackData } = await supabase
-          .from('page_views')
-          .select('views_count')
-          .eq('id', 1)
-          .maybeSingle();
-
-        if (fallbackData && fallbackData.views_count !== undefined) {
-          counterElement.innerText = fallbackData.views_count;
-        }
-        return;
-      }
-
-      if (newCount !== null && newCount !== undefined) {
-        counterElement.innerText = newCount;
-      }
-    } catch (err) {
-      console.error('Błąd po stronie klienta przy obsłudze licznika:', err.message);
-    }
-  }
-
-  // 4. POBIERANIE I RENDEROWANIE ALERTÓW DLA TABELI
-  async function fetchAlerts() {
-  const alertsContainer = document.getElementById('alerts-list');
-  if (!alertsContainer) return;
-
-  try {
-    const { data: alerts, error } = await supabase
-      .from('alerts')
-      .select('*')
-      .order('pub_date', { ascending: false })
-      .limit(30);
-
-    if (error) throw error;
-
-    if (!alerts || alerts.length === 0) {
-      alertsContainer.innerHTML = '<tr><td colspan="5">Brak aktywnych alertów.</td></tr>';
-      return;
-    }
-
-    // Renderowanie wierszy tabeli z pełną datą
-    alertsContainer.innerHTML = alerts.map(alert => {
-      const pubDate = new Date(alert.pub_date).toLocaleString('pl-PL', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-
-      return `
-        <tr>
-          <td><strong>[${alert.country}]</strong></td>
-          <td><span class="badge badge-${alert.type}">${alert.type_name || alert.type}</span></td>
-          <td>
-            <a href="${alert.source_url}" target="_blank" rel="noopener noreferrer">
-              ${alert.title}
-            </a>
-          </td>
-          <td>${alert.summary || ''}</td>
-          <td><small>${pubDate}</small></td>
-        </tr>
-      `;
-    }).join('');
-
-  } catch (err) {
-    console.error('Błąd podczas renderowania listy alertów:', err.message);
-    alertsContainer.innerHTML = '<tr><td colspan="5">Wystąpił błąd podczas ładowania danych.</td></tr>';
-  }
-}
-
-      // Renderowanie wierszy tabeli
-      alertsContainer.innerHTML = alerts.map(alert => {
-        const pubDate = new Date(alert.pub_date).toLocaleString('pl-PL', {
-          day: '2-digit',
-          month: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit'
-        });
-
-        return `
-          <tr>
-            <td><strong>[${alert.country}]</strong></td>
-            <td><span class="badge badge-${alert.type}">${alert.type_name || alert.type}</span></td>
-            <td>
-              <a href="${alert.source_url}" target="_blank" rel="noopener noreferrer">
-                ${alert.title}
-              </a>
-            </td>
-            <td>${alert.summary || ''}</td>
-            <td><small>${pubDate}</small></td>
-          </tr>
-        `;
-      }).join('');
-
-    } catch (err) {
-      console.error('Błąd podczas renderowania listy alertów:', err.message);
-      alertsContainer.innerHTML = '<tr><td colspan="5">Wystąpił błąd podczas ładowania danych.</td></tr>';
-    }
-  }
-
-  // 5. INICJALIZACJA - Wszystkie funkcje działają niezależnie od siebie
-  document.addEventListener('DOMContentLoaded', () => {
-    fetchLastDatabaseUpdate(); // Czas dodania ostatniego wpisu przez bota
-    updateAndFetchCounter();   // Licznik odwiedzin
-    fetchAlerts();             // Tabela alertów
-  });
-</script>
-<!-- Wklej ten skrypt przed zamykającym tagiem </body> w index.html -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  // 1. KONFIGURACJA SUPABASE (Uzupełnij swoje dane)
-  const SUPABASE_URL = 'https://TWOJ-PROJECT-ID.supabase.co';
-  const SUPABASE_ANON_KEY = 'TWOJ_PUBLIC_ANON_KEY';
-  
-  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  // 2. CZAŚ OSTATNIEJ INGESTII BOTA (po created_at)
-  async function fetchLastDatabaseUpdate() {
-    const updateElement = document.getElementById('last-update');
-    if (!updateElement) return;
-
-    try {
-      const { data, error } = await supabase
-        .from('alerts')
-        .select('created_at')
-        .order('created_at', { ascending: false })
-        .limit(1)
-        .maybeSingle();
-
-      if (error) throw error;
-
-      if (data && data.created_at) {
-        const dateObj = new Date(data.created_at);
-        updateElement.innerText = dateObj.toLocaleString('pl-PL', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit'
-        });
-      } else {
-        updateElement.innerText = 'Brak wpisów w bazie';
-      }
-    } catch (err) {
-      console.error('Błąd odczytu czasu aktualizacji:', err.message);
-      updateElement.innerText = 'Błąd odczytu';
-    }
-  }
-
-  // 3. LICZNIK ODWIEDZIN (Izolowany z fallbackiem)
-  async function updateAndFetchCounter() {
-    const counterElement = document.getElementById('views-counter');
-    if (!counterElement) return;
-
-    try {
-      const { data: newCount, error: rpcError } = await supabase.rpc('increment_page_views');
-
-      if (rpcError) {
-        console.warn('RPC Error licznika:', rpcError.message);
-        const { data: fallbackData } = await supabase
-          .from('page_views')
-          .select('views_count')
-          .eq('id', 1)
-          .maybeSingle();
-
-        if (fallbackData && fallbackData.views_count !== undefined) {
-          counterElement.innerText = fallbackData.views_count;
-        }
-        return;
-      }
-
-      if (newCount !== null && newCount !== undefined) {
-        counterElement.innerText = newCount;
-      }
-    } catch (err) {
-      console.error('Błąd licznika odwiedzin:', err.message);
-    }
-  }
-
-  // 4. RENDEROWANIE ALERTÓW DLA STRONY GŁÓWNEJ (Ścisła chronologia)
-  async function fetchMainAlerts() {
-    const alertsContainer = document.getElementById('alerts-list');
-    if (!alertsContainer) return;
-
-    try {
-      const { data: alerts, error } = await supabase
-        .from('alerts')
-        .select('*')
-        .order('pub_date', { ascending: false })
-        .order('created_at', { ascending: false }) // Drugi stopień sortowania
-        .limit(20);
-
-      if (error) throw error;
-
-      if (!alerts || alerts.length === 0) {
-        alertsContainer.innerHTML = '<tr><td colspan="5" class="text-center">Brak aktywnych alertów w tej chwili.</td></tr>';
-        return;
-      }
-
-      alertsContainer.innerHTML = alerts.map(alert => {
-        const pubDate = new Date(alert.pub_date).toLocaleString('pl-PL', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit'
-        });
-
-        return `
-          <tr>
-            <td><strong>[${alert.country}]</strong></td>
-            <td><span class="badge badge-${alert.type}">${alert.type_name || alert.type}</span></td>
-            <td>
-              <a href="${alert.source_url}" target="_blank" rel="noopener noreferrer">
-                ${alert.title}
-              </a>
-            </td>
-            <td>${alert.summary || ''}</td>
-            <td><small>${pubDate}</small></td>
-          </tr>
-        `;
-      }).join('');
-
-    } catch (err) {
-      console.error('Błąd ładowania alertów:', err.message);
-      alertsContainer.innerHTML = '<tr><td colspan="5" class="text-center">Błąd pobierania danych.</td></tr>';
-    }
-  }
-
-  // 5. RENDEROWANIE ARCHIWUM (Jeśli występuje na stronie)
-  async function fetchArchiveAlerts() {
-    const archiveContainer = document.getElementById('archive-list');
-    if (!archiveContainer) return;
-
-    try {
-      const { data: alerts, error } = await supabase
-        .from('alerts')
-        .select('*')
-        .order('pub_date', { ascending: false })
-        .order('created_at', { ascending: false })
-        .limit(100);
-
-      if (error) throw error;
-
-      if (!alerts || alerts.length === 0) {
-        archiveContainer.innerHTML = '<tr><td colspan="5" class="text-center">Archiwum jest puste.</td></tr>';
-        return;
-      }
-
-      archiveContainer.innerHTML = alerts.map(alert => {
-        const pubDate = new Date(alert.pub_date).toLocaleString('pl-PL', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit'
-        });
-
-        return `
-          <tr>
-            <td><strong>[${alert.country}]</strong></td>
-            <td><span class="badge badge-${alert.type}">${alert.type_name || alert.type}</span></td>
-            <td>
-              <a href="${alert.source_url}" target="_blank" rel="noopener noreferrer">
-                ${alert.title}
-              </a>
-            </td>
-            <td>${alert.summary || ''}</td>
-            <td><small>${pubDate}</small></td>
-          </tr>
-        `;
-      }).join('');
-
-    } catch (err) {
-      console.error('Błąd ładowania archiwum:', err.message);
-    }
-  }
-
-  // INICJALIZACJA
-  document.addEventListener('DOMContentLoaded', () => {
-    fetchLastDatabaseUpdate();
-    updateAndFetchCounter();
-    fetchMainAlerts();
-    fetchArchiveAlerts();
-  });
-</script>
 </body>
 </html>
