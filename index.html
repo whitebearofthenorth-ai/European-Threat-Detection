@@ -1,10 +1,36 @@
-<!-- ETD FRONTEND V2.5.8 - UX / VISUAL LIFT V6 -->
+<!-- ETD FRONTEND V2.7.11-UPDATE-TEST - CANONICAL EVENTS / REALTIME + RESYNC -->
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+<!-- ETD V2.7.11 UPDATE BADGE TEST + TAG WIDTH FIX + EVENT/UPDATE TIME FIX -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>European Threat Detection & Monitoring System</title>
+  <title>European Threat Detection | European Security Threat Monitoring</title>
+  <meta name="description" content="European Threat Detection to system monitorowania zagrożeń i incydentów bezpieczeństwa w Europie, obejmujący m.in. terroryzm, zagrożenia bombowe, ataki z użyciem broni, napaści oraz zagrożenia infrastruktury krytycznej.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical intentionally omitted in this test build until the final production URL is confirmed. -->
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="European Threat Detection">
+  <meta property="og:description" content="Europejski monitoring zagrożeń i incydentów bezpieczeństwa.">
+  <meta property="og:type" content="website">
+
+  <!-- X / Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="European Threat Detection">
+  <meta name="twitter:description" content="Europejski monitoring zagrożeń i incydentów bezpieczeństwa.">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "European Threat Detection",
+    "description": "Europejski monitoring zagrożeń i incydentów bezpieczeństwa.",
+    "inLanguage": "pl"
+  }
+  </script>
   
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -458,11 +484,18 @@
     }
 
     .alert-tag {
+      display: inline-flex;
+      width: fit-content;
+      max-width: 100%;
+      flex: 0 0 auto;
+      align-self: flex-start;
+      box-sizing: border-box;
       font-size: 0.7rem;
       font-weight: 700;
       padding: 2px 6px;
       border-radius: 4px;
       text-transform: uppercase;
+      line-height: 1.35;
     }
 
     .tag-terror { background-color: rgba(220, 38, 38, 0.2); color: #fca5a5; }
@@ -1223,7 +1256,37 @@
       .map-header-subtitle { display: none; }
     }
 
-  </style>
+  
+/* V2.7.11 PAGINATION V2 TEST */
+.archive-pagination-container { margin-top: 14px; }
+.archive-page-info { margin: 10px 0; text-align: center; opacity: .75; font-size: .9rem; }
+.archive-pagination { display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; margin:14px 0 24px; }
+.archive-page-btn { cursor:pointer; border:1px solid rgba(127,127,127,.35); background:transparent; color:inherit; border-radius:8px; padding:7px 11px; }
+.archive-page-btn.active { font-weight:700; }
+.archive-page-btn:disabled { opacity:.4; cursor:default; }
+
+
+/* ETD UPDATE BADGE */
+.etd-update-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  vertical-align: middle;
+  background: rgba(255, 193, 7, .16);
+  color: #ffc107;
+  border: 1px solid rgba(255, 193, 7, .35);
+}
+.etd-update-time {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 11px;
+  opacity: .78;
+}
+</style>
 </head>
 <body>
 
@@ -1410,6 +1473,8 @@
             </tbody>
           </table>
         </div>
+        <div class="archive-page-info" id="archive-page-info"></div>
+        <div class="archive-pagination-container" id="archive-pagination"></div>
       </div>
     </div>
 
@@ -1427,11 +1492,15 @@
 
           <div class="about-card">
             <h3>⚙️ Architektura Technologiczna</h3>
-            <p>Platforma wykorzystuje nowoczesne rozwiązania do rejestracji i analizy przestrzennej danych w czasie rzeczywistym:</p>
+            <p>European Threat Detection wykorzystuje architekturę opartą na przetwarzaniu zdarzeń, relacyjnej bazie danych i komunikacji w czasie rzeczywistym:</p>
             <ul>
-              <li><strong>Leaflet.js</strong> – Wydajna wizualizacja kartograficzna</li>
-              <li><strong>Supabase / PostgreSQL</strong> – Baza danych i bezpieczna komunikacja real-time</li>
-              <li><strong>Algorytmy statystyczne</strong> – Automatyczna analiza powtarzalności incydentów</li>
+              <li><strong>GPT-OSS-120B</strong> – analiza i klasyfikacja zdarzeń oraz ekstrakcja informacji z materiałów źródłowych</li>
+              <li><strong>Supabase / PostgreSQL</strong> – centralna warstwa danych przechowująca kanoniczne zdarzenia, ich klasyfikację, lokalizację oraz metadane</li>
+              <li><strong>Supabase Realtime</strong> – natychmiastowa synchronizacja zmian w bazie z interfejsem ETD, bez konieczności ręcznego odświeżania strony</li>
+              <li><strong>RPC / PostgreSQL</strong> – agregacja i obliczanie statystyk dotyczących kategorii, państw i lokalizacji bezpośrednio w warstwie danych</li>
+              <li><strong>Leaflet.js</strong> – interaktywna wizualizacja geograficzna zdarzeń na mapie Europy</li>
+              <li><strong>Kanoniczny model zdarzeń</strong> – identyfikacja pojedynczego incydentu niezależnie od liczby materiałów źródłowych, ograniczająca duplikowanie alertów</li>
+              <li><strong>Serwerowa paginacja i filtrowanie</strong> – efektywne przeglądanie archiwum bez konieczności pobierania całego zbioru danych do przeglądarki</li>
             </ul>
           </div>
 
@@ -1540,7 +1609,7 @@
           <div class="status-dot"></div>
         </div>
         <span>Online teraz:</span>
-        <span id="online-count" class="counter-value">1</span>
+        <span id="online-count" class="counter-value">0</span></span>
       </div>
     </div>
   </footer>
@@ -1553,7 +1622,7 @@
   </div>
 
   <div class="frontend-version" style="text-align: center; font-size: 0.72rem; opacity: 0.55; padding: 4px 0 14px;">
-    Frontend: V2.5.8
+    Frontend: V2.7.11
   </div>
 
   <!-- SKRYPTY -->
@@ -1604,6 +1673,16 @@ function hasValidCoordinates(latValue, lngValue) {
     let markersGroup = null;
     let allAlertsData = [];
     let dataConnectionState = 'loading';
+    let realtimeChannel = null;
+    let realtimeReady = false;
+    let realtimeReconnectTimer = null;
+// V2.7.11 PAGINATION V2 TEST
+const ARCHIVE_PAGE_SIZE = 20;
+let archiveCurrentPage = 1;
+let archiveTotalCount = 0;
+let archiveLoading = false;
+
+    let realtimeResyncInProgress = false;
 
     function setLiveStatus(state) {
       dataConnectionState = state;
@@ -1638,10 +1717,10 @@ function hasValidCoordinates(latValue, lngValue) {
   if (t === 'bomb' || t.includes('bomb') || t.includes('explosive') || t.includes('ied')) return 'bomb';
   if (t === 'weapon' || t.includes('weapon') || t.includes('broń')) return 'weapon';
   if (t === 'knife' || t.includes('knife') || t.includes('nóż') || t.includes('noż')) return 'knife';
-  if (t === 'assault' || t.includes('assault') || t.includes('napad') || t.includes('gwałt')) return 'assault';
+  if (t === 'assault' || t.includes('assault') || t.includes('napad') || t.includes('napaś') || t.includes('przemoc') || t.includes('gwałt') || t.includes('rozbój') || t.includes('pobici')) return 'assault';
   if (t === 'infrastructure' || t.includes('infrastructure') || t.includes('infrastrukt')) return 'infrastructure';
 
-  return 'assault';
+  return 'unknown';
 }
 
     function getCategoryColor(type) {
@@ -1730,6 +1809,8 @@ function hasValidCoordinates(latValue, lngValue) {
       setTimeout(() => map.invalidateSize(), 100);
     }
 
+    // Backend contract: ETD V2.7.11 production adapter -> public.alerts.
+    // Canonical event identity: guid. parent/legacy article identity is not used by the UI.
     const SUPABASE_URL = 'https://enotstzvfbiadbzrsjtr.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVub3RzdHp2ZmJpYWRienJzanRyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4NTEyNTEsImV4cCI6MjEwMzQyNzI1MX0._sAR9_idTEC4AlJL1R6Jvj3f5Rq5tRpVtGAy-UtvCps';
 
@@ -1762,6 +1843,17 @@ function hasValidCoordinates(latValue, lngValue) {
     }
 
 
+    function getSafeHttpUrl(value) {
+      if (!value) return null;
+      try {
+        const url = new URL(String(value).trim());
+        if (url.protocol !== 'http:' && url.protocol !== 'https:') return null;
+        return url.href;
+      } catch {
+        return null;
+      }
+    }
+
     function getSourceName(url) {
       if (!url) return 'Źródło';
       try {
@@ -1779,45 +1871,463 @@ function hasValidCoordinates(latValue, lngValue) {
       }
     }
 
+    
+    // V2.7.11 SUPABASE STATISTICS TEST
+    let supabaseStatistics = null;
+    let supabaseStatisticsLoading = false;
+
+    async function loadStatisticsFromSupabase() {
+      if (supabaseStatisticsLoading) return;
+      supabaseStatisticsLoading = true;
+
+      try {
+        const { data, error } = await supabaseClient.rpc('get_alert_statistics');
+        if (error) throw error;
+
+        supabaseStatistics = data || null;
+        console.log('[ETD Statistics] loaded from Supabase RPC', supabaseStatistics);
+
+        renderStatisticsFromSupabase();
+      } catch (error) {
+        console.error('[ETD Statistics] RPC error:', error);
+      } finally {
+        supabaseStatisticsLoading = false;
+      }
+    }
+
+    function renderStatisticsFromSupabase() {
+      if (!supabaseStatistics) return;
+
+      const stats = supabaseStatistics;
+      window.__etdSupabaseStatistics = stats;
+
+      // Render the existing statistics UI directly from the RPC payload.
+      // Percentages are intentionally based on total_alerts for every section.
+      const countryTable = document.getElementById('country-stats-table');
+      const cityTable = document.getElementById('city-stats-table');
+      const cityNote = document.getElementById('city-stats-note');
+      const typeList = document.getElementById('type-stats-list');
+
+      if (!countryTable || !cityTable || !cityNote || !typeList) {
+        console.warn('[ETD Statistics] Statistics containers not found');
+        return;
+      }
+
+      const total = Number(stats.total_alerts || 0);
+      const countries = Array.isArray(stats.countries) ? stats.countries : [];
+      const cities = Array.isArray(stats.cities) ? stats.cities : [];
+      const types = Array.isArray(stats.types) ? stats.types : [];
+
+      const getCountryName = (countryCode) => {
+        const code = String(countryCode || '').trim().toUpperCase();
+        if (!code) return 'Nieokreślone';
+        try {
+          if (typeof Intl !== 'undefined' && Intl.DisplayNames) {
+            const displayNames = new Intl.DisplayNames(['pl'], { type: 'region' });
+            return displayNames.of(code) || code;
+          }
+        } catch (_) {}
+        const fallback = {
+          PL: 'Polska', DE: 'Niemcy', UA: 'Ukraina', SA: 'Arabia Saudyjska',
+          FR: 'Francja', BE: 'Belgia', AT: 'Austria', NL: 'Niderlandy',
+          HR: 'Chorwacja', GB: 'Wielka Brytania', MC: 'Monako'
+        };
+        return fallback[code] || code;
+      };
+
+      const pct = (count) => total > 0
+        ? Math.round((Number(count || 0) / total) * 100)
+        : 0;
+
+      const statsTotal = document.getElementById('stats-total-count');
+      const statsCountries = document.getElementById('stats-country-count');
+      const statsCities = document.getElementById('stats-city-count');
+      const statsTypes = document.getElementById('stats-type-count');
+
+      if (statsTotal) statsTotal.textContent = Number(stats.total_alerts || 0).toLocaleString('pl-PL');
+      if (statsCountries) statsCountries.textContent = Number(stats.total_countries || 0).toLocaleString('pl-PL');
+      if (statsCities) statsCities.textContent = Number(stats.total_cities || 0).toLocaleString('pl-PL');
+      if (statsTypes) statsTypes.textContent = Number(stats.total_categories || 0).toLocaleString('pl-PL');
+
+      const dashboardAlertCount = document.getElementById('dashboard-alert-count');
+      const dashboardCountryCount = document.getElementById('dashboard-country-count');
+      const dashboardTypeCount = document.getElementById('dashboard-type-count');
+      if (dashboardAlertCount) dashboardAlertCount.textContent = Number(stats.total_alerts || 0).toLocaleString('pl-PL');
+      if (dashboardCountryCount) dashboardCountryCount.textContent = Number(stats.total_countries || 0).toLocaleString('pl-PL');
+      if (dashboardTypeCount) dashboardTypeCount.textContent = Number(stats.total_categories || 0).toLocaleString('pl-PL');
+
+      countryTable.innerHTML = countries.map(data => `
+        <tr>
+          <td>${escapeHtml(getCountryName(data.country))}</td>
+          <td class="count-cell">${Number(data.count || 0)}</td>
+          <td class="percent-cell">${pct(data.count)}%</td>
+        </tr>
+      `).join('') || '<tr><td colspan="3" class="stats-empty">Brak danych.</td></tr>';
+
+      cityTable.innerHTML = cities.map(data => `
+        <tr>
+          <td>${escapeHtml(data.city || '')}</td>
+          <td>${escapeHtml(getCountryName(data.country))}</td>
+          <td class="count-cell">${Number(data.count || 0)}</td>
+          <td class="percent-cell">${pct(data.count)}%</td>
+        </tr>
+      `).join('') || '<tr><td colspan="4" class="stats-empty">Brak alertów z jednoznacznie określonym miastem.</td></tr>';
+
+      const cityAlertCount = cities.reduce((sum, item) => sum + Number(item.count || 0), 0);
+      const alertsWithoutCity = Math.max(0, total - cityAlertCount);
+      cityNote.textContent = alertsWithoutCity > 0
+        ? `${alertsWithoutCity} ${alertsWithoutCity === 1 ? 'alert nie ma' : 'alerty nie mają'} jednoznacznie określonego miasta i nie są uwzględniane w statystyce miast.`
+        : '';
+
+      const createBarHtml = (label, count, color = '#38bdf8') => {
+        const percent = pct(count);
+        return `
+          <div class="stat-bar-item">
+            <div class="stat-bar-header">
+              <span>${escapeHtml(label)}</span>
+              <span style="color: ${color}; font-weight: 600;">${Number(count || 0)} (${percent}%)</span>
+            </div>
+            <div class="stat-bar-bg">
+              <div class="stat-bar-fill" style="width: ${percent}%; background-color: ${color};"></div>
+            </div>
+          </div>
+        `;
+      };
+
+      typeList.innerHTML = types.map(data => {
+        const type = data.type || 'unknown';
+        const label = data.type_name || type;
+        return createBarHtml(label, data.count, getCategoryColor(type));
+      }).join('');
+
+      console.log('[ETD Statistics] rendered from Supabase RPC');
+    }
+
+
+    function renderStatisticsCompatibility(stats) {
+      // Compatibility renderer only runs if the existing renderer cannot consume the RPC shape.
+      // It updates common statistics containers without altering the rest of the page.
+      const setText = (selectors, value) => {
+        for (const selector of selectors) {
+          const el = document.querySelector(selector);
+          if (el) {
+            el.textContent = value;
+            return true;
+          }
+        }
+        return false;
+      };
+
+      setText(['#stat-total-alerts', '[data-stat="total-alerts"]'], stats.totalAlerts);
+      setText(['#stat-total-countries', '[data-stat="total-countries"]'], stats.totalCountries);
+      setText(['#stat-total-cities', '[data-stat="total-cities"]'], stats.totalCities);
+      setText(['#stat-total-categories', '[data-stat="total-categories"]'], stats.totalCategories);
+    }
+
+function renderAllViews() {
+      renderMapAndSidebar(allAlertsData);
+      // Statistics are authoritative from Supabase RPC.
+      // Do not calculate them from the full client-side alert dataset.
+      if (supabaseStatistics) {
+        renderStatisticsFromSupabase();
+      }
+
+      if (allAlertsData.length > 0) {
+        const dateVal = allAlertsData.reduce((latest, item) => {
+          const value = item?.updated_at || item?.created_at;
+          if (!value) return latest;
+          if (!latest) return value;
+          return new Date(value) > new Date(latest) ? value : latest;
+        }, null);
+
+        const lastUpdate = dateVal
+          ? new Date(dateVal).toLocaleString('pl-PL')
+          : 'Brak daty';
+
+        const updateEl = document.getElementById('last-update-time');
+        if (updateEl) updateEl.innerText = lastUpdate;
+      }
+    }
+
+    function getArchivePaginationHtml() {
+      const totalPages = Math.max(1, Math.ceil(archiveTotalCount / ARCHIVE_PAGE_SIZE));
+      if (totalPages <= 1) return '';
+
+      const prevDisabled = archiveCurrentPage <= 1 ? ' disabled' : '';
+      const nextDisabled = archiveCurrentPage >= totalPages ? ' disabled' : '';
+
+      let pages = '';
+      const startPage = Math.max(1, archiveCurrentPage - 2);
+      const endPage = Math.min(totalPages, archiveCurrentPage + 2);
+
+      for (let p = startPage; p <= endPage; p++) {
+        pages += `<button type="button" class="archive-page-btn${p === archiveCurrentPage ? ' active' : ''}" data-page="${p}">${p}</button>`;
+      }
+
+      return `
+        <div class="archive-pagination" aria-label="Paginacja archiwum">
+          <button type="button" class="archive-page-btn" data-page="${archiveCurrentPage - 1}"${prevDisabled}>← Poprzednia</button>
+          ${pages}
+          <button type="button" class="archive-page-btn" data-page="${archiveCurrentPage + 1}"${nextDisabled}>Następna →</button>
+        </div>
+      `;
+    }
+
+    function bindArchivePagination() {
+      document.querySelectorAll('.archive-page-btn[data-page]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const page = Number(btn.dataset.page);
+          const totalPages = Math.max(1, Math.ceil(archiveTotalCount / ARCHIVE_PAGE_SIZE));
+          if (!Number.isInteger(page) || page < 1 || page > totalPages || archiveLoading) return;
+          archiveCurrentPage = page;
+          await loadArchivePage();
+        });
+      });
+    }
+
+    function getArchiveFilterValues() {
+      return {
+        search: (document.getElementById('archive-search')?.value || '').trim(),
+        type: document.getElementById('archive-type-filter')?.value || 'all'
+      };
+    }
+
+    async function loadArchivePage() {
+      if (archiveLoading) return;
+      archiveLoading = true;
+
+      const tbody = document.getElementById('archive-table-body');
+      if (tbody) tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">Ładowanie archiwum...</td></tr>';
+
+      try {
+        const from = (archiveCurrentPage - 1) * ARCHIVE_PAGE_SIZE;
+        const to = from + ARCHIVE_PAGE_SIZE - 1;
+        const { search, type } = getArchiveFilterValues();
+
+        let query = supabaseClient
+          .from('alerts')
+          .select('id,guid,title,summary,type,type_name,country,city,location,lat,lng,source_url,pub_date,created_at,updated_at', { count: 'exact' })
+          .order('pub_date', { ascending: false, nullsFirst: false })
+          .order('created_at', { ascending: false });
+
+        if (type !== 'all') query = query.eq('type', type);
+
+        if (search) {
+          const safeSearch = search.replace(/[%_,]/g, ' ').replace(/[()]/g, ' ');
+          query = query.or(`title.ilike.%${safeSearch}%,location.ilike.%${safeSearch}%`);
+        }
+
+        const { data, count, error } = await query.range(from, to);
+        if (error) throw error;
+
+        archiveTotalCount = Number(count || 0);
+        const pageData = Array.isArray(data) ? data : [];
+        const totalPages = Math.max(1, Math.ceil(archiveTotalCount / ARCHIVE_PAGE_SIZE));
+
+        if (archiveCurrentPage > totalPages) {
+          archiveCurrentPage = totalPages;
+          archiveLoading = false;
+          return loadArchivePage();
+        }
+
+        renderArchiveTable(pageData);
+
+        const info = document.getElementById('archive-page-info');
+        if (info) {
+          const first = archiveTotalCount ? from + 1 : 0;
+          const last = Math.min(from + pageData.length, archiveTotalCount);
+          info.textContent = `Wyświetlono ${first}–${last} z ${archiveTotalCount}`;
+        }
+
+        const container = document.getElementById('archive-pagination');
+        if (container) {
+          container.innerHTML = getArchivePaginationHtml();
+          bindArchivePagination();
+        }
+      } catch (err) {
+        console.error('[ETD Pagination] Archive load error:', err);
+        if (tbody) tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#fca5a5;">Nie udało się pobrać archiwum.</td></tr>';
+      } finally {
+        archiveLoading = false;
+      }
+    }
+
     async function loadAlerts() {
       setLiveStatus('loading');
+
       try {
         const { data, error } = await supabaseClient
           .from('alerts')
-          .select('*')
+          .select('id,guid,title,summary,type,type_name,country,city,location,lat,lng,source_url,pub_date,created_at,updated_at')
+          .order('pub_date', { ascending: false, nullsFirst: false })
           .order('created_at', { ascending: false });
 
         if (error) throw error;
 
         allAlertsData = data || [];
-        setLiveStatus('online');
+        renderAllViews();
+
+        // "NA ŻYWO" oznacza dopiero aktywny kanał Realtime.
+        if (realtimeReady) {
+          setLiveStatus('online');
+        }
       } catch (err) {
-        setLiveStatus('offline');
         console.error('Błąd pobierania alertów:', err);
         allAlertsData = [];
+        setLiveStatus('offline');
+
         const container = document.getElementById('alerts-container');
         if (container) {
           container.innerHTML = '<div style="padding:16px;color:#fca5a5;">Nie udało się pobrać aktualnych alertów.</div>';
         }
+
         const updateEl = document.getElementById('last-update-time');
         if (updateEl) updateEl.innerText = 'Błąd odczytu';
       }
+    }
 
-      renderMapAndSidebar(allAlertsData);
-      renderArchiveTable(allAlertsData);
-      renderStatistics(allAlertsData);
+    function getAlertIdentity(record) {
+      if (!record) return null;
+      if (record.guid) return `guid:${String(record.guid)}`;
+      if (record.id !== undefined && record.id !== null) return `id:${String(record.id)}`;
+      return null;
+    }
 
-      if (allAlertsData.length > 0) {
-        const dateVal = allAlertsData.reduce((latest, item) => {
-            const value = item?.created_at;
-            if (!value) return latest;
-            if (!latest) return value;
-            return new Date(value) > new Date(latest) ? value : latest;
-          }, null);
-        const lastUpdate = dateVal ? new Date(dateVal).toLocaleString('pl-PL') : 'Brak daty';
-        const updateEl = document.getElementById('last-update-time');
-        if (updateEl) updateEl.innerText = lastUpdate;
+
+    function hasAlertUpdate(record) {
+      if (!record?.updated_at) return false;
+      if (!record?.created_at) return true;
+      const updated = new Date(record.updated_at).getTime();
+      const created = new Date(record.created_at).getTime();
+      return Number.isFinite(updated) && Number.isFinite(created) && updated > created;
+    }
+
+    function formatAlertUpdateTime(record) {
+      if (!hasAlertUpdate(record)) return '';
+      const value = new Date(record.updated_at);
+      if (Number.isNaN(value.getTime())) return '';
+      return value.toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function getAlertEventDate(record) {
+      return record?.pub_date || record?.created_at || null;
+    }
+
+    function upsertRealtimeAlert(record) {
+      if (!record) return;
+
+      const identity = getAlertIdentity(record);
+      const existingIndex = identity
+        ? allAlertsData.findIndex(item => getAlertIdentity(item) === identity)
+        : -1;
+
+      if (existingIndex >= 0) {
+        allAlertsData[existingIndex] = { ...allAlertsData[existingIndex], ...record };
+      } else {
+        allAlertsData.push(record);
       }
+
+      allAlertsData.sort((a, b) => {
+        const da = new Date(getAlertEventDate(a) || 0).getTime();
+        const db = new Date(getAlertEventDate(b) || 0).getTime();
+        return db - da;
+      });
+
+      renderAllViews();
+    }
+
+    function removeRealtimeAlert(record) {
+      if (!record) return;
+
+      const identity = getAlertIdentity(record);
+      if (!identity) return;
+
+      allAlertsData = allAlertsData.filter(item => getAlertIdentity(item) !== identity);
+      renderAllViews();
+      loadStatisticsFromSupabase();
+    }
+
+    async function resyncAfterRealtimeReconnect() {
+      if (realtimeResyncInProgress) return;
+
+      realtimeResyncInProgress = true;
+      console.log('[ETD Realtime] resync: start');
+
+      try {
+        await loadAlerts();
+        console.log('[ETD Realtime] resync: complete');
+      } catch (error) {
+        console.error('[ETD Realtime] resync: failed', error);
+      } finally {
+        realtimeResyncInProgress = false;
+      }
+    }
+
+    function subscribeToRealtime() {
+      if (realtimeChannel) {
+        supabaseClient.removeChannel(realtimeChannel);
+        realtimeChannel = null;
+      }
+
+      realtimeReady = false;
+      setLiveStatus('loading');
+
+      realtimeChannel = supabaseClient
+        .channel('etd-alerts-live-v2711')
+        .on(
+          'postgres_changes',
+          { event: 'INSERT', schema: 'public', table: 'alerts' },
+          (payload) => {
+            console.log('[ETD Realtime] INSERT', payload.new?.id);
+            upsertRealtimeAlert(payload.new);
+          }
+        )
+        .on(
+          'postgres_changes',
+          { event: 'UPDATE', schema: 'public', table: 'alerts' },
+          (payload) => {
+            console.log('[ETD Realtime] UPDATE', payload.new?.id);
+            upsertRealtimeAlert(payload.new);
+            loadStatisticsFromSupabase();
+          }
+        )
+        .on(
+          'postgres_changes',
+          { event: 'DELETE', schema: 'public', table: 'alerts' },
+          (payload) => {
+            console.log('[ETD Realtime] DELETE', payload.old?.id);
+            removeRealtimeAlert(payload.old);
+          }
+        )
+        .subscribe((status) => {
+          console.log('[ETD Realtime] status:', status);
+
+          if (status === 'SUBSCRIBED') {
+            const wasAlreadyReady = realtimeReady;
+            realtimeReady = true;
+            setLiveStatus('online');
+
+            if (wasAlreadyReady) {
+              // Reconnected after a drop, sleep, or network interruption.
+              // Re-fetch the current DB state to recover alerts missed while offline.
+              resyncAfterRealtimeReconnect();
+            }
+          } else if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') {
+            realtimeReady = false;
+            setLiveStatus('degraded');
+
+            if (realtimeReconnectTimer) {
+              clearTimeout(realtimeReconnectTimer);
+            }
+
+            realtimeReconnectTimer = setTimeout(() => {
+              subscribeToRealtime();
+            }, 10000);
+          } else if (status === 'CLOSED') {
+            realtimeReady = false;
+            setLiveStatus('degraded');
+          }
+        });
     }
 
     function renderMapAndSidebar(alerts) {
@@ -1832,9 +2342,13 @@ function hasValidCoordinates(latValue, lngValue) {
       }
 
       alerts.forEach(item => {
-        const normType = normalizeType(item.type_name || item.type);
-        const locationText = item.location || item.location_name || 'Brak dokładnej lokalizacji';
+        const normType = normalizeType(item.type || item.type_name);
+        const locationText = item.location || 'Brak dokładnej lokalizacji';
+        const safeSourceUrl = getSafeHttpUrl(item.source_url);
         const itemDate = item.pub_date || item.created_at;
+        const updateBadge = hasAlertUpdate(item)
+          ? `<span class="etd-update-badge">UPDATE</span><span class="etd-update-time">${formatAlertUpdateTime(item)}</span>`
+          : '';
 
         const lat = Number(item.lat);
         const lng = Number(item.lng);
@@ -1864,17 +2378,17 @@ function hasValidCoordinates(latValue, lngValue) {
         card.innerHTML = `
           <div class="alert-header-row">
             <span class="alert-tag tag-${normType}">${escapeHtml(item.type_name || item.type || 'Inne')}</span>
-            <span class="alert-time">${itemDate ? new Date(itemDate).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : ''}</span>
+            <span class="alert-time">${itemDate ? new Date(itemDate).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : ''}${updateBadge}</span>
           </div>
           <div class="alert-title">${escapeHtml(item.title)}</div>
           <div class="alert-location">📍 ${escapeHtml(locationText)}</div>
         
-          ${item.source_url ? `
+          ${safeSourceUrl ? `
             <a class="alert-source"
-               href="${escapeHtml(item.source_url)}"
+               href="${escapeHtml(safeSourceUrl)}"
                target="_blank"
                rel="noopener noreferrer">
-              ↗ ${escapeHtml(getSourceName(item.source_url))}
+              ↗ ${escapeHtml(getSourceName(safeSourceUrl))}
             </a>
           ` : ''}
 `;
@@ -1910,15 +2424,18 @@ function hasValidCoordinates(latValue, lngValue) {
       }
 
       alerts.forEach(item => {
-        const normType = normalizeType(item.type_name || item.type);
+        const normType = normalizeType(item.type || item.type_name);
         const itemDate = item.pub_date || item.created_at;
         const dateFormatted = itemDate ? new Date(itemDate).toLocaleString('pl-PL') : 'Brak';
+        const updateBadge = hasAlertUpdate(item)
+          ? `<span class="etd-update-badge">UPDATE</span><span class="etd-update-time">${formatAlertUpdateTime(item)}</span>`
+          : '';
         const locationText = item.location || item.location_name || 'Brak danych';
         const coordsText = hasPreciseMapLocation(item) ? `${Number(item.lat).toFixed(4)}, ${Number(item.lng).toFixed(4)}` : 'Brak geolokalizacji';
 
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td>${escapeHtml(dateFormatted)}</td>
+          <td>${escapeHtml(dateFormatted)}${updateBadge}</td>
           <td><span class="alert-tag tag-${normType}">${escapeHtml(item.type_name || item.type || 'Inne')}</span></td>
           <td style="font-weight:600; color:#f8fafc;">${escapeHtml(item.title)}</td>
           <td>📍 ${escapeHtml(locationText)}</td>
@@ -1940,192 +2457,128 @@ function hasValidCoordinates(latValue, lngValue) {
     }
 
     function renderStatistics(alerts) {
-      const countryTable = document.getElementById('country-stats-table');
-      const cityTable = document.getElementById('city-stats-table');
-      const cityNote = document.getElementById('city-stats-note');
-      const typeList = document.getElementById('type-stats-list');
-
-      if (!countryTable || !cityTable || !cityNote || !typeList) return;
-
-      const countryCounts = {};
-      const cityCounts = {};
-      const typeCounts = {};
-      let alertsWithoutCity = 0;
-
-      const getCountryName = (countryCode) => {
-        const code = String(countryCode || '').trim().toUpperCase();
-        if (!code) return 'Nieokreślone';
-
-        try {
-          if (typeof Intl !== 'undefined' && Intl.DisplayNames) {
-            const displayNames = new Intl.DisplayNames(['pl'], { type: 'region' });
-            return displayNames.of(code) || code;
-          }
-        } catch (_) {}
-
-        const fallback = {
-          PL: 'Polska',
-          DE: 'Niemcy',
-          UA: 'Ukraina',
-          SA: 'Arabia Saudyjska',
-          FR: 'Francja',
-          BE: 'Belgia',
-          AT: 'Austria',
-          NL: 'Niderlandy',
-          HR: 'Chorwacja',
-          GB: 'Wielka Brytania',
-          MC: 'Monako'
-        };
-        return fallback[code] || code;
-      };
-
-      alerts.forEach(item => {
-        const countryCode = String(item.country || '').trim().toUpperCase();
-        const countryKey = countryCode || 'UNKNOWN';
-        if (!countryCounts[countryKey]) {
-          countryCounts[countryKey] = {
-            name: getCountryName(countryCode),
-            count: 0
-          };
-        }
-        countryCounts[countryKey].count += 1;
-
-        // Miasto tylko z jednoznacznego pola city.
-        // Kraj, region i ogólna lokalizacja nigdy nie są traktowane jako miasto.
-        const city = String(item.city || '').trim();
-        if (city) {
-          const cityKey = `${city}||${countryKey}`;
-          if (!cityCounts[cityKey]) {
-            cityCounts[cityKey] = {
-              city,
-              country: getCountryName(countryCode),
-              count: 0
-            };
-          }
-          cityCounts[cityKey].count += 1;
-        } else {
-          alertsWithoutCity += 1;
-        }
-
-        const normalizedType = normalizeType(item.type);
-        const typeName = item.type_name || {
-          terror: 'Terroryzm',
-          bomb: 'Zagrożenie bombowe',
-          weapon: 'Broń / atak z użyciem broni',
-          knife: 'Atak z użyciem noża / narzędzia niebezpiecznego',
-          assault: 'Napaść / Przemoc',
-          infrastructure: 'Zagrożenie infrastruktury krytycznej'
-        }[normalizedType] || normalizedType;
-
-        if (!typeCounts[normalizedType]) {
-          typeCounts[normalizedType] = { name: typeName, count: 0 };
-        }
-        typeCounts[normalizedType].count += 1;
-      });
-
-      const total = alerts.length || 1;
-
-      const statsTotal = document.getElementById('stats-total-count');
-      const statsCountries = document.getElementById('stats-country-count');
-      const statsCities = document.getElementById('stats-city-count');
-      const statsTypes = document.getElementById('stats-type-count');
-      if (statsTotal) statsTotal.textContent = alerts.length.toLocaleString('pl-PL');
-      if (statsCountries) statsCountries.textContent = Object.keys(countryCounts).filter(key => key !== 'UNKNOWN').length.toLocaleString('pl-PL');
-      if (statsCities) statsCities.textContent = Object.keys(cityCounts).length.toLocaleString('pl-PL');
-      if (statsTypes) statsTypes.textContent = Object.keys(typeCounts).length.toLocaleString('pl-PL');
-
-      const dashboardAlertCount = document.getElementById('dashboard-alert-count');
-      const dashboardCountryCount = document.getElementById('dashboard-country-count');
-      const dashboardTypeCount = document.getElementById('dashboard-type-count');
-      if (dashboardAlertCount) dashboardAlertCount.textContent = alerts.length.toLocaleString('pl-PL');
-      if (dashboardCountryCount) dashboardCountryCount.textContent = Object.keys(countryCounts).filter(key => key !== 'UNKNOWN').length.toLocaleString('pl-PL');
-      if (dashboardTypeCount) dashboardTypeCount.textContent = Object.keys(typeCounts).length.toLocaleString('pl-PL');
-
-      const countryRows = Object.values(countryCounts)
-        .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, 'pl'))
-        .map(data => {
-          const percent = Math.round((data.count / total) * 100);
-          return `
-            <tr>
-              <td>${escapeHtml(data.name)}</td>
-              <td class="count-cell">${data.count}</td>
-              <td class="percent-cell">${percent}%</td>
-            </tr>
-          `;
-        }).join('');
-
-      countryTable.innerHTML = countryRows ||
-        '<tr><td colspan="3" class="stats-empty">Brak danych.</td></tr>';
-
-      const cityRows = Object.values(cityCounts)
-        .sort((a, b) => b.count - a.count || a.city.localeCompare(b.city, 'pl'))
-        .map(data => {
-          const percent = Math.round((data.count / total) * 100);
-          return `
-            <tr>
-              <td>${escapeHtml(data.city)}</td>
-              <td>${escapeHtml(data.country)}</td>
-              <td class="count-cell">${data.count}</td>
-              <td class="percent-cell">${percent}%</td>
-            </tr>
-          `;
-        }).join('');
-
-      cityTable.innerHTML = cityRows ||
-        '<tr><td colspan="4" class="stats-empty">Brak alertów z jednoznacznie określonym miastem.</td></tr>';
-
-      cityNote.textContent = alertsWithoutCity > 0
-        ? `${alertsWithoutCity} ${alertsWithoutCity === 1 ? 'alert nie ma' : 'alerty nie mają'} jednoznacznie określonego miasta i nie są uwzględniane w statystyce miast.`
-        : '';
-
-      const createBarHtml = (label, count, color = '#38bdf8') => {
-        const percent = Math.round((count / total) * 100);
-        return `
-          <div class="stat-bar-item">
-            <div class="stat-bar-header">
-              <span>${escapeHtml(label)}</span>
-              <span style="color: ${color}; font-weight: 600;">${count} (${percent}%)</span>
-            </div>
-            <div class="stat-bar-bg">
-              <div class="stat-bar-fill" style="width: ${percent}%; background-color: ${color};"></div>
-            </div>
-          </div>
-        `;
-      };
-
-      typeList.innerHTML = Object.entries(typeCounts)
-        .sort((a, b) => b[1].count - a[1].count)
-        .map(([type, data]) => createBarHtml(data.name, data.count, getCategoryColor(type)))
-        .join('');
+      // Legacy entry point intentionally disabled in this test.
+      // Statistics are rendered exclusively from Supabase RPC.
+      if (supabaseStatistics) renderStatisticsFromSupabase();
     }
 
+
     function filterArchive() {
-      const searchInput = document.getElementById('archive-search');
-      const typeFilter = document.getElementById('archive-type-filter');
-      if (!searchInput || !typeFilter) return;
-      const searchValue = searchInput.value.toLowerCase();
-      const typeValue = typeFilter.value;
-
-      const filtered = allAlertsData.filter(item => {
-        const titleMatch = item.title ? item.title.toLowerCase().includes(searchValue) : false;
-        const loc = item.location || item.location_name || '';
-        const locationMatch = loc.toLowerCase().includes(searchValue);
-        const matchesSearch = titleMatch || locationMatch;
-
-        const normType = normalizeType(item.type_name || item.type);
-        const matchesType = typeValue === 'all' || normType === typeValue;
-
-        return matchesSearch && matchesType;
-      });
-
-      renderArchiveTable(filtered);
+      archiveCurrentPage = 1;
+      loadArchivePage();
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       initMap();
       loadAlerts();
+      loadArchivePage();
+      loadStatisticsFromSupabase();
+      subscribeToRealtime();
       updatePageViews();
+    initOnlineNow();
+
     });
-  </script>
+  
+
+/* =========================================================
+   ETD V2.7.11 - ONLINE NOW TEST FIXED
+   ========================================================= */
+const ONLINE_HEARTBEAT_MS = 30000;
+const ONLINE_REFRESH_MS = 30000;
+let onlineSessionId = null;
+let onlineHeartbeatTimer = null;
+let onlineRefreshTimer = null;
+
+function getOrCreateOnlineSessionId() {
+  const key = 'etd_online_session_id';
+  let id = sessionStorage.getItem(key);
+
+  if (!id) {
+    if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+      id = window.crypto.randomUUID();
+    } else {
+      id = 'etd-' + Date.now() + '-' + Math.random().toString(16).slice(2);
+    }
+    sessionStorage.setItem(key, id);
+  }
+
+  return id;
+}
+
+function setOnlineCount(value) {
+  const el = document.getElementById('online-count');
+  if (!el) return;
+
+  const count = Number(value);
+  el.textContent = Number.isFinite(count) ? String(count) : '0';
+}
+
+async function upsertOnlinePresence() {
+  if (!onlineSessionId) return;
+
+  const { error } = await supabaseClient
+    .from('active_visitors')
+    .upsert(
+      {
+        session_id: onlineSessionId,
+        last_seen: new Date().toISOString()
+      },
+      {
+        onConflict: 'session_id'
+      }
+    );
+
+  if (error) {
+    console.error('[ETD Online] heartbeat error', error);
+    return false;
+  }
+
+  console.log('[ETD Online] heartbeat OK');
+  return true;
+}
+
+async function loadOnlineCount() {
+  const { data, error } = await supabaseClient.rpc('get_active_visitors');
+
+  if (error) {
+    console.error('[ETD Online] count error', error);
+    return;
+  }
+
+  setOnlineCount(data);
+  console.log('[ETD Online] active visitors:', data);
+}
+
+async function initOnlineNow() {
+  if (typeof supabaseClient === 'undefined' || !supabaseClient) {
+    console.error('[ETD Online] Supabase client is not ready');
+    return;
+  }
+
+  onlineSessionId = getOrCreateOnlineSessionId();
+
+  await upsertOnlinePresence();
+  await loadOnlineCount();
+
+  if (onlineHeartbeatTimer) clearInterval(onlineHeartbeatTimer);
+  if (onlineRefreshTimer) clearInterval(onlineRefreshTimer);
+
+  onlineHeartbeatTimer = setInterval(upsertOnlinePresence, ONLINE_HEARTBEAT_MS);
+  onlineRefreshTimer = setInterval(loadOnlineCount, ONLINE_REFRESH_MS);
+
+  if (!document.body.dataset.etdOnlineVisibilityBound) {
+    document.addEventListener('visibilitychange', async () => {
+      if (document.visibilityState === 'visible') {
+        await upsertOnlinePresence();
+        await loadOnlineCount();
+      }
+    });
+    document.body.dataset.etdOnlineVisibilityBound = 'true';
+  }
+
+  console.log('[ETD Online] initialized');
+}
+
+</script>
 </body>
 </html>
