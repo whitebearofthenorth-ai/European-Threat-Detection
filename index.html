@@ -948,15 +948,36 @@
     }
 
     .dashboard-hero {
-      min-height: 92px;
+      position: relative;
+      min-height: 118px;
       padding: 18px 20px;
       border: 1px solid #33445f;
       border-radius: 14px;
-      background: linear-gradient(135deg, rgba(14,165,233,.13), rgba(15,23,42,.75));
+      background:
+        linear-gradient(90deg, rgba(7,17,28,.98) 0%, rgba(7,17,28,.88) 38%, rgba(7,17,28,.54) 72%, rgba(7,17,28,.70) 100%),
+        url('etd-hero-map-bg.jpg') center right / cover no-repeat;
       box-shadow: 0 10px 28px rgba(0,0,0,.16);
       display: flex;
       flex-direction: column;
       justify-content: center;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .dashboard-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(7,17,28,.10) 0%, rgba(7,17,28,.30) 100%),
+        radial-gradient(circle at 78% 50%, rgba(56,189,248,.08), transparent 38%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .dashboard-hero > * {
+      position: relative;
+      z-index: 1;
     }
 
     .dashboard-hero-kicker {
@@ -1255,7 +1276,10 @@
     @media (max-width: 480px) {
       .stats-kpi-grid { grid-template-columns: 1fr; }
       .dashboard-kpi { min-height: 78px; }
-      .dashboard-hero { min-height: 82px; }
+      .dashboard-hero {
+        min-height: 112px;
+        background-position: 72% center;
+      }
       .map-header-subtitle { display: none; }
     }
 
@@ -1368,7 +1392,10 @@
 
       <aside class="alerts-sidebar">
         <div class="panel-header">
-          <span>OSTATNIE ALERTY</span>
+          <div>
+            <span>OSTATNIE ALERTY</span>
+            <div style="font-size:0.68rem;color:#94a3b8;font-weight:500;margin-top:3px;">Alerty z ostatnich 48 godzin</div>
+          </div>
           <span class="live-status status-loading" style="font-size: 0.75rem; font-weight: 700;">● ŁĄCZENIE</span>
         </div>
         <div class="alerts-list" id="alerts-container">
@@ -1802,11 +1829,11 @@ let archiveLoading = false;
         zoom: 5
       });
 
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        maxZoom: 19,
-        className: 'dark-map-tiles',
-        attribution: '&copy; OpenStreetMap &copy; CARTO'
-      }).addTo(map);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=cb1_3zex_1_4690069ca0eb7acda7388423', {
+  maxZoom: 19,
+  className: 'dark-map-tiles',
+  attribution: '&copy; OpenStreetMap &copy; CARTO'
+}).addTo(map);
 
       markersGroup = L.layerGroup().addTo(map);
       setTimeout(() => map.invalidateSize(), 100);
@@ -2333,20 +2360,58 @@ function renderAllViews() {
         });
     }
 
+    function getCountryDisplayName(countryCode) {
+      const code = String(countryCode || '').trim().toUpperCase();
+      if (!code) return 'Nieokreślone';
+      try {
+        if (typeof Intl !== 'undefined' && Intl.DisplayNames) {
+          const displayNames = new Intl.DisplayNames(['pl'], { type: 'region' });
+          const name = displayNames.of(code);
+          if (name) return name;
+        }
+      } catch (_) {}
+      const fallback = {
+        PL: 'Polska', DE: 'Niemcy', UA: 'Ukraina', FR: 'Francja',
+        BE: 'Belgia', AT: 'Austria', NL: 'Niderlandy', GB: 'Wielka Brytania',
+        IT: 'Włochy', ES: 'Hiszpania', CZ: 'Czechy', SK: 'Słowacja',
+        HU: 'Węgry', RO: 'Rumunia', BG: 'Bułgaria', HR: 'Chorwacja',
+        SE: 'Szwecja', NO: 'Norwegia', DK: 'Dania', FI: 'Finlandia',
+        PT: 'Portugalia', GR: 'Grecja', IE: 'Irlandia', CH: 'Szwajcaria',
+        SI: 'Słowenia', LT: 'Litwa', LV: 'Łotwa', EE: 'Estonia',
+        RS: 'Serbia', BA: 'Bośnia i Hercegowina', ME: 'Czarnogóra',
+        AL: 'Albania', MK: 'Macedonia Północna', MD: 'Mołdawia', MC: 'Monako'
+      };
+      return fallback[code] || code;
+    }
+
+    function isWithinLast48Hours(item) {
+      const value = getAlertEventDate(item);
+      if (!value) return false;
+      const timestamp = new Date(value).getTime();
+      if (!Number.isFinite(timestamp)) return false;
+      const now = Date.now();
+      return timestamp >= now - (48 * 60 * 60 * 1000) && timestamp <= now;
+    }
+
     function renderMapAndSidebar(alerts) {
       const alertsContainer = document.getElementById('alerts-container');
       if (!alertsContainer || !markersGroup) return;
       alertsContainer.innerHTML = '';
       markersGroup.clearLayers();
 
-      if (alerts.length === 0) {
-        alertsContainer.innerHTML = '<div style="padding:16px;color:#94a3b8;">Brak aktywnych alertów.</div>';
-        return;
+      const recentSidebarAlerts = alerts.filter(isWithinLast48Hours);
+
+      if (recentSidebarAlerts.length === 0) {
+        alertsContainer.innerHTML = '<div style="padding:16px;color:#94a3b8;">Brak alertów z ostatnich 48 godzin.</div>';
       }
 
       alerts.forEach(item => {
         const normType = normalizeType(item.type || item.type_name);
         const locationText = item.location || 'Brak dokładnej lokalizacji';
+        const countryText = getCountryDisplayName(item.country);
+        const locationWithCountry = item.location
+          ? `${locationText}, ${countryText}`
+          : `${locationText} (${countryText})`;
         const safeSourceUrl = getSafeHttpUrl(item.source_url);
         const itemDate = item.pub_date || item.created_at;
         const updateBadge = hasAlertUpdate(item)
@@ -2373,6 +2438,10 @@ function renderAllViews() {
           `);
         }
 
+        // The map receives the complete alert dataset.
+        // Only the sidebar cards are restricted to the last 48 hours.
+        if (!isWithinLast48Hours(item)) return;
+
         const card = document.createElement('div');
         card.className = `alert-card ${normType}`;
         card.tabIndex = 0;
@@ -2384,7 +2453,7 @@ function renderAllViews() {
             <span class="alert-time">${itemDate ? new Date(itemDate).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : ''}${updateBadge}</span>
           </div>
           <div class="alert-title">${escapeHtml(item.title)}</div>
-          <div class="alert-location">📍 ${escapeHtml(locationText)}</div>
+          <div class="alert-location">📍 ${escapeHtml(locationWithCountry)}</div>
         
           ${safeSourceUrl ? `
             <a class="alert-source"

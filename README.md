@@ -1,26 +1,43 @@
-ETD V2.7.11 - EVENT ORDER + TAG WIDTH FIX TEST
+# ETD V2.7.11 - HERO BACKGROUND GRAPHIC TEST
 
-Baza:
-index-v2.7.11-update-badge-about-refresh-test.html
+## Cel testu
 
-Zmiany:
-1. Ostatnie alerty są sortowane według czasu zdarzenia:
-   pub_date DESC, następnie created_at DESC.
-   updated_at NIE wpływa już na kolejność alertów.
+Dodano przesłaną grafikę ETD jako subtelne tło sekcji nagłówkowej dashboardu.
 
-2. Realtime INSERT/UPDATE również utrzymuje kolejność według czasu zdarzenia.
-   UPDATE nadal zachowuje badge UPDATE oraz godzinę aktualizacji.
+Grafika:
+- działa wyłącznie jako warstwa wizualna,
+- znajduje się w istniejącym `.dashboard-hero`,
+- jest przyciemniona i częściowo wygaszona gradientem,
+- wykorzystuje osobny plik `etd-hero-map-bg.jpg`, skupiony na mapie Europy,
+- nie przykrywa tekstu interfejsu,
+- nie wpływa na mapę Leaflet.
 
-3. Archiwum sortuje rekordy według pub_date DESC, następnie created_at DESC.
+## Zachowane bez zmian
 
-4. Tagi kategorii mają szerokość wynikającą z tekstu + paddingu.
-   Nie rozciągają się na pozostałą szerokość wiersza.
+- alerty z ostatnich 48 godzin w bocznym panelu,
+- pełny zestaw alertów na mapie,
+- miejscowość + kraj,
+- CARTO Voyager + API key,
+- Leaflet 1.9.4,
+- Supabase / Realtime,
+- statystyki,
+- archiwum / paginacja,
+- Online Now,
+- pozostała logika ETD V2.7.11,
+- poprawki kosmetyczne z poprzedniego testu.
 
-Zachowane:
-- UPDATE badge i godzina aktualizacji
-- Realtime UPDATE
-- odświeżanie statystyk
-- paginacja i filtrowanie archiwum
-- Online teraz
-- poprawiona sekcja Architektura Technologiczna
-- pozostały interfejs bez zmian
+## Zakres zmian
+
+Zmiana dotyczy wyłącznie warstwy wizualnej `.dashboard-hero` oraz dodania lokalnego assetu graficznego.
+
+Nie zmieniano logiki JavaScript, zapytań Supabase ani mechanizmu Realtime.
+
+## Test
+
+**TEST / NIE WDRAŻAĆ NA PRODUKCJĘ**
+
+Przed wdrożeniem sprawdzić:
+1. wygląd dashboardu na desktopie,
+2. czy tekst nagłówka pozostaje czytelny,
+3. wygląd na węższym ekranie,
+4. czy mapa, alerty, archiwum i statystyki działają jak wcześniej.
