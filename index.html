@@ -477,9 +477,10 @@
     .alert-card.infrastructure { border-left-color: #16a34a; }
 
     .alert-header-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: start;
+      column-gap: 8px;
       margin-bottom: 6px;
     }
 
@@ -487,9 +488,11 @@
       display: inline-flex;
       width: fit-content;
       max-width: 100%;
-      flex: 0 0 auto;
+      min-width: 0;
+      flex: 0 1 auto;
       align-self: flex-start;
       box-sizing: border-box;
+      overflow-wrap: anywhere;
       font-size: 0.7rem;
       font-weight: 700;
       padding: 2px 6px;
