@@ -39,11 +39,38 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "European Threat Detection",
-    "url": "https://whitebearofthenorth-ai.github.io/European-Threat-Detection/",
-    "description": "Europejski monitoring zagrożeń i incydentów bezpieczeństwa.",
-    "inLanguage": "pl"
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://whitebearofthenorth-ai.github.io/European-Threat-Detection/#website",
+        "name": "European Threat Detection",
+        "url": "https://whitebearofthenorth-ai.github.io/European-Threat-Detection/",
+        "description": "Europejski monitoring zagrożeń i incydentów bezpieczeństwa.",
+        "inLanguage": "pl",
+        "publisher": {
+          "@id": "https://whitebearofthenorth-ai.github.io/European-Threat-Detection/#organization"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://whitebearofthenorth-ai.github.io/European-Threat-Detection/#organization",
+        "name": "White Bear Of The North"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://whitebearofthenorth-ai.github.io/European-Threat-Detection/#webpage",
+        "url": "https://whitebearofthenorth-ai.github.io/European-Threat-Detection/",
+        "name": "European Threat Detection | European Security Threat Monitoring",
+        "description": "European Threat Detection to system monitorowania zagrożeń i incydentów bezpieczeństwa w Europie.",
+        "inLanguage": "pl",
+        "isPartOf": {
+          "@id": "https://whitebearofthenorth-ai.github.io/European-Threat-Detection/#website"
+        },
+        "publisher": {
+          "@id": "https://whitebearofthenorth-ai.github.io/European-Threat-Detection/#organization"
+        }
+      }
+    ]
   }
   </script>
   
