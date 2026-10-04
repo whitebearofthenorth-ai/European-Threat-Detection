@@ -2822,8 +2822,8 @@ function setOnlineCount(value) {
 async function upsertOnlinePresence() {
   if (!onlineSessionId) return false;
 
-  // The table is no longer written directly: the heartbeat RPC sets last_seen server-side.
-  const { error } = await supabaseClient.rpc('heartbeat', {
+  // The table is no longer written directly: the controlled RPC sets last_seen server-side.
+  const { error } = await supabaseClient.rpc('touch_active_visitor', {
     p_session_id: onlineSessionId
   });
 
