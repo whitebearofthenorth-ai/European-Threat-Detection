@@ -1,25 +1,39 @@
-<!-- ETD FRONTEND V2.7.11-UPDATE-TEST - CANONICAL EVENTS / REALTIME + RESYNC -->
+<!-- ETD frontend V2.7.11 -->
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<!-- ETD V2.7.11 UPDATE BADGE TEST + TAG WIDTH FIX + EVENT/UPDATE TIME FIX -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Security: Content-Security-Policy via meta tag (GitHub Pages cannot send custom response headers).
+       Note: frame-ancestors, report-uri and sandbox are ignored in a meta policy. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://web3forms.com https://hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://hcaptcha.com https://*.hcaptcha.com; img-src 'self' data: blob: https://*.basemaps.cartocdn.com https://cdn.jsdelivr.net; connect-src 'self' https://enotstzvfbiadbzrsjtr.supabase.co wss://enotstzvfbiadbzrsjtr.supabase.co https://api.web3forms.com https://web3forms.com https://hcaptcha.com https://*.hcaptcha.com; frame-src https://hcaptcha.com https://*.hcaptcha.com; font-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>European Threat Detection | European Security Threat Monitoring</title>
   <meta name="description" content="European Threat Detection to system monitorowania zagrożeń i incydentów bezpieczeństwa w Europie, obejmujący m.in. terroryzm, zagrożenia bombowe, ataki z użyciem broni, napaści oraz zagrożenia infrastruktury krytycznej.">
   <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230f172a'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%2338bdf8' stroke-width='3'/%3E%3Cpath d='M32 2v12M32 50v12M2 32h12M50 32h12' stroke='%2338bdf8' stroke-width='3'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23ef4444'/%3E%3C/svg%3E">
 
-  <!-- Canonical intentionally omitted in this test build until the final production URL is confirmed. -->
+  <link rel="canonical" href="https://whitebearofthenorth-ai.github.io/European-Threat-Detection/">
 
   <!-- Open Graph -->
   <meta property="og:title" content="European Threat Detection">
   <meta property="og:description" content="Europejski monitoring zagrożeń i incydentów bezpieczeństwa.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://whitebearofthenorth-ai.github.io/European-Threat-Detection/">
+  <meta property="og:site_name" content="European Threat Detection">
+  <meta property="og:locale" content="pl_PL">
+  <meta property="og:image" content="https://whitebearofthenorth-ai.github.io/European-Threat-Detection/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="European Threat Detection: mapa Europy z oznaczonymi punktami zagrożeń">
 
   <!-- X / Twitter -->
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="European Threat Detection">
   <meta name="twitter:description" content="Europejski monitoring zagrożeń i incydentów bezpieczeństwa.">
+  <meta name="twitter:image" content="https://whitebearofthenorth-ai.github.io/European-Threat-Detection/og-image.jpg">
+  <meta name="twitter:image:alt" content="European Threat Detection: mapa Europy z oznaczonymi punktami zagrożeń">
 
   <!-- Structured data -->
   <script type="application/ld+json">
@@ -27,13 +41,14 @@
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "European Threat Detection",
+    "url": "https://whitebearofthenorth-ai.github.io/European-Threat-Detection/",
     "description": "Europejski monitoring zagrożeń i incydentów bezpieczeństwa.",
     "inLanguage": "pl"
   }
   </script>
   
   <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
 
   <style>
     * {
@@ -268,6 +283,17 @@
     footer {
       margin-top: 8px;
     }
+
+    /* --- PRIVACY LINK + HONEYPOT --- */
+    .privacy-link-bar { text-align: center; padding: 10px 16px 0; font-size: 0.78rem; }
+    .link-button {
+      background: none; border: none; padding: 0; margin: 0;
+      color: #38bdf8; font: inherit; cursor: pointer; text-decoration: underline;
+    }
+    .link-button:hover { color: #7dd3fc; }
+    .link-button:focus-visible { outline: 2px solid #38bdf8; outline-offset: 2px; }
+    .h-captcha { margin: 14px 0 4px; max-width: 100%; overflow-x: auto; }
+    .form-privacy-note { font-size: 0.78rem; color: #94a3b8; margin-top: 12px; }
 
     .counter-widget {
       max-width: 100%;
@@ -1284,7 +1310,7 @@
     }
 
   
-/* V2.7.11 PAGINATION V2 TEST */
+/* V2.7.11 pagination */
 .archive-pagination-container { margin-top: 14px; }
 .archive-page-info { margin: 10px 0; text-align: center; opacity: .75; font-size: .9rem; }
 .archive-pagination { display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; margin:14px 0 24px; }
@@ -1316,6 +1342,9 @@
 </style>
 </head>
 <body>
+  <noscript>
+    <div style="padding:16px;text-align:center;background:#7f1d1d;color:#fff;">Do działania serwisu European Threat Detection wymagany jest włączony JavaScript.</div>
+  </noscript>
 
   <!-- PASEK GÓRNY -->
   <header class="top-header">
@@ -1327,24 +1356,24 @@
       <span>EUROPEAN THREAT DETECTION</span>
     </div>
 
-    <nav class="nav-tabs">
-      <button class="nav-btn active" onclick="switchTab(event, 'dashboard')">
-        <span>📊 DASHBOARD</span>
+    <nav class="nav-tabs" role="tablist" aria-label="Sekcje serwisu">
+      <button class="nav-btn active" role="tab" id="tab-dashboard" aria-selected="true" aria-controls="dashboard-tab" tabindex="0" onclick="switchTab(event, 'dashboard')">
+        <span><span aria-hidden="true">📊</span> DASHBOARD</span>
       </button>
-      <button class="nav-btn" onclick="switchTab(event, 'stats')">
-        <span>📈 STATYSTYKI</span>
+      <button class="nav-btn" role="tab" id="tab-stats" aria-selected="false" aria-controls="stats-tab" tabindex="-1" onclick="switchTab(event, 'stats')">
+        <span><span aria-hidden="true">📈</span> STATYSTYKI</span>
       </button>
-      <button class="nav-btn" onclick="switchTab(event, 'archive')">
-        <span>📁 ARCHIWUM</span>
+      <button class="nav-btn" role="tab" id="tab-archive" aria-selected="false" aria-controls="archive-tab" tabindex="-1" onclick="switchTab(event, 'archive')">
+        <span><span aria-hidden="true">📁</span> ARCHIWUM</span>
       </button>
-      <button class="nav-btn" onclick="switchTab(event, 'about')">
-        <span>ℹ️ O SERWISIE</span>
+      <button class="nav-btn" role="tab" id="tab-about" aria-selected="false" aria-controls="about-tab" tabindex="-1" onclick="switchTab(event, 'about')">
+        <span><span aria-hidden="true">ℹ️</span> O SERWISIE</span>
       </button>
-      <button class="nav-btn" onclick="switchTab(event, 'contact')">
-        <span>✉️ NAPISZ DO NAS</span>
+      <button class="nav-btn" role="tab" id="tab-contact" aria-selected="false" aria-controls="contact-tab" tabindex="-1" onclick="switchTab(event, 'contact')">
+        <span><span aria-hidden="true">✉️</span> NAPISZ DO NAS</span>
       </button>
-      <button class="nav-btn" onclick="switchTab(event, 'cooperation')">
-        <span>🤝 NAWIĄŻ WSPÓŁPRACĘ</span>
+      <button class="nav-btn" role="tab" id="tab-cooperation" aria-selected="false" aria-controls="cooperation-tab" tabindex="-1" onclick="switchTab(event, 'cooperation')">
+        <span><span aria-hidden="true">🤝</span> NAWIĄŻ WSPÓŁPRACĘ</span>
       </button>
     </nav>
   </header>
@@ -1352,7 +1381,7 @@
   <!-- TREŚĆ STRONY -->
   <main>
     <!-- TAB 1: DASHBOARD -->
-    <div id="dashboard-tab" class="tab-content active">
+    <div id="dashboard-tab" class="tab-content active" role="tabpanel" aria-labelledby="tab-dashboard">
       <div class="dashboard-strip">
         <div class="dashboard-hero">
           <div class="dashboard-hero-kicker">CENTRUM MONITORINGU</div>
@@ -1381,12 +1410,12 @@
         <div id="map"></div>
         <div class="map-legend">
           <span class="map-legend-title">KATEGORIE</span>
-          <span class="legend-item"><span class="legend-dot" style="color:#dc2626;background:#dc2626"></span>Terror</span>
-          <span class="legend-item"><span class="legend-dot" style="color:#f97316;background:#f97316"></span>Bomb</span>
-          <span class="legend-item"><span class="legend-dot" style="color:#2563eb;background:#2563eb"></span>Weapon</span>
-          <span class="legend-item"><span class="legend-dot" style="color:#eab308;background:#eab308"></span>Knife</span>
-          <span class="legend-item"><span class="legend-dot" style="color:#a855f7;background:#a855f7"></span>Assault</span>
-          <span class="legend-item"><span class="legend-dot" style="color:#16a34a;background:#16a34a"></span>Infrastructure</span>
+          <span class="legend-item"><span class="legend-dot" style="color:#dc2626;background:#dc2626"></span>Terroryzm</span>
+          <span class="legend-item"><span class="legend-dot" style="color:#f97316;background:#f97316"></span>Zagrożenie bombowe</span>
+          <span class="legend-item"><span class="legend-dot" style="color:#2563eb;background:#2563eb"></span>Broń/Atak z użyciem broni</span>
+          <span class="legend-item"><span class="legend-dot" style="color:#eab308;background:#eab308"></span>Atak z użyciem noża / narzędzia niebezpiecznego</span>
+          <span class="legend-item"><span class="legend-dot" style="color:#a855f7;background:#a855f7"></span>Napaść / Przemoc</span>
+          <span class="legend-item"><span class="legend-dot" style="color:#16a34a;background:#16a34a"></span>Zagrożenie infrastruktury krytycznej</span>
         </div>
       </section>
 
@@ -1396,7 +1425,7 @@
             <span>OSTATNIE ALERTY</span>
             <div style="font-size:0.68rem;color:#94a3b8;font-weight:500;margin-top:3px;">Alerty z ostatnich 48 godzin</div>
           </div>
-          <span class="live-status status-loading" style="font-size: 0.75rem; font-weight: 700;">● ŁĄCZENIE</span>
+          <span class="live-status status-loading" role="status" aria-live="polite" style="font-size: 0.75rem; font-weight: 700;">● ŁĄCZENIE</span>
         </div>
         <div class="alerts-list" id="alerts-container">
           <!-- Generowanie wpisów -->
@@ -1405,7 +1434,7 @@
     </div>
 
     <!-- TAB 2: STATYSTYKI -->
-    <div id="stats-tab" class="tab-content">
+    <div id="stats-tab" class="tab-content" role="tabpanel" aria-labelledby="tab-stats">
       <div class="stats-container">
         <div class="stats-heading-row">
           <div>
@@ -1468,12 +1497,12 @@
     </div>
 
     <!-- TAB 3: ARCHIWUM -->
-    <div id="archive-tab" class="tab-content">
+    <div id="archive-tab" class="tab-content" role="tabpanel" aria-labelledby="tab-archive">
       <div class="archive-container">
         <h2 class="form-title" style="margin-bottom: 16px;">Archiwum Alertów i Incydentów</h2>
         
         <div class="archive-filters">
-          <input type="text" id="archive-search" class="form-control" placeholder="Szukaj wg tytułu lub lokalizacji..." style="flex: 1; min-width: 200px;" oninput="filterArchive()">
+          <input type="text" id="archive-search" class="form-control" placeholder="Szukaj wg tytułu lub lokalizacji..." style="flex: 1; min-width: 200px;" oninput="filterArchiveDebounced()">
           <select id="archive-type-filter" class="form-control" style="width: 200px;" onchange="filterArchive()">
             <option value="all">Wszystkie kategorie</option>
             <option value="terror">Terroryzm</option>
@@ -1509,7 +1538,7 @@
     </div>
 
     <!-- TAB 4: O SERWISIE -->
-    <div id="about-tab" class="tab-content">
+    <div id="about-tab" class="tab-content" role="tabpanel" aria-labelledby="tab-about">
       <div class="about-container">
         <h2 class="form-title" style="margin-bottom: 8px;">O Systemie European Threat Detection</h2>
         <p class="form-subtitle">Zintegowana platforma analityczno-monitoringowa dedykowana identyfikacji zagrożeń bezpieczeństwa w przestrzeni europejskiej.</p>
@@ -1517,20 +1546,31 @@
         <div class="about-grid">
           <div class="about-card">
             <h3>🎯 Misja Projektu</h3>
-            <p>System powstał w celu zapewnienia dostępu do zagregowanych, geolokalizowanych informacji o bieżących incydentach bezpieczeństwa na terenie Europy. Naszym celem jest podnoszenie świadomości sytuacyjnej oraz wsparcie analityczne dla obywateli i podmiotów branżowych.</p>
+            <p>System powstał w celu zapewnienia dostępu do zagregowanych, geolokalizowanych informacji o bieżących incydentach bezpieczeństwa na terenie Europy. ETD łączy automatyczne przetwarzanie źródeł RSS z analizą zdarzeń, kontrolą jakości danych i semantycznym łączeniem materiałów opisujących ten sam incydent.</p>
           </div>
 
           <div class="about-card">
             <h3>⚙️ Architektura Technologiczna</h3>
-            <p>European Threat Detection wykorzystuje architekturę opartą na przetwarzaniu zdarzeń, relacyjnej bazie danych i komunikacji w czasie rzeczywistym:</p>
+            <p>European Threat Detection wykorzystuje wieloetapową architekturę analityczną opartą na przetwarzaniu zdarzeń, semantycznej deduplikacji, relacyjnej bazie danych i komunikacji w czasie rzeczywistym:</p>
             <ul>
-              <li><strong>GPT-OSS-120B</strong> – analiza i klasyfikacja zdarzeń oraz ekstrakcja informacji z materiałów źródłowych</li>
-              <li><strong>Supabase / PostgreSQL</strong> – centralna warstwa danych przechowująca kanoniczne zdarzenia, ich klasyfikację, lokalizację oraz metadane</li>
+              <li><strong>GPT-OSS-120B</strong> – analiza i klasyfikacja materiałów źródłowych, ekstrakcja zdarzeń oraz przygotowanie polskich tytułów i opisów</li>
+              <li><strong>Semantic Matcher V12.8</strong> – semantyczne rozpoznawanie, czy nowy materiał opisuje istniejące zdarzenie, z mechanizmem UPDATE / INSERT i zabezpieczeniami przed łączeniem różnych incydentów</li>
+              <li><strong>Title Quality Repair</strong> – dodatkowa kontrola jakości polskich tytułów, obejmująca wykrywanie języka angielskiego oraz weryfikację i naprawę jednoznacznych błędów językowych</li>
+              <li><strong>Supabase / PostgreSQL</strong> – centralna warstwa danych przechowująca kanoniczne alerty, ich klasyfikację, lokalizację oraz metadane</li>
               <li><strong>Supabase Realtime</strong> – natychmiastowa synchronizacja zmian w bazie z interfejsem ETD, bez konieczności ręcznego odświeżania strony</li>
               <li><strong>RPC / PostgreSQL</strong> – agregacja i obliczanie statystyk dotyczących kategorii, państw i lokalizacji bezpośrednio w warstwie danych</li>
               <li><strong>Leaflet.js</strong> – interaktywna wizualizacja geograficzna zdarzeń na mapie Europy</li>
               <li><strong>Kanoniczny model zdarzeń</strong> – identyfikacja pojedynczego incydentu niezależnie od liczby materiałów źródłowych, ograniczająca duplikowanie alertów</li>
               <li><strong>Serwerowa paginacja i filtrowanie</strong> – efektywne przeglądanie archiwum bez konieczności pobierania całego zbioru danych do przeglądarki</li>
+            </ul>
+          </div>
+
+          <div class="about-card">
+            <h3>📡 Źródła Danych</h3>
+            <p>W produkcji ETD wykorzystuje sześć aktywnych źródeł RSS. Siódme źródło znajduje się obecnie w fazie testowej i nie jest jeszcze częścią pełnego zestawu produkcyjnego.</p>
+            <ul>
+              <li><strong>Produkcja:</strong> Tagesschau (DE), ANSA Cronaca (IT), BBC Europe (EU), VRT NWS (BE), France24 Europe (FR), Sky News UK (GB)</li>
+              <li><strong>Testy:</strong> SVT (SE)</li>
             </ul>
           </div>
 
@@ -1555,13 +1595,63 @@
       </div>
     </div>
 
+    <!-- TAB: POLITYKA PRYWATNOŚCI -->
+    <div id="privacy-tab" class="tab-content" role="tabpanel" aria-label="Polityka prywatności">
+      <div class="about-container">
+        <h2 class="form-title" style="margin-bottom: 8px;">Polityka prywatności</h2>
+        <p class="form-subtitle">Poniżej opisujemy, jakie dane przetwarzamy podczas korzystania z serwisu European Threat Detection i komu je przekazujemy.</p>
+
+        <div class="about-grid">
+          <div class="about-card">
+            <h3>Administrator danych</h3>
+            <p>Administratorem danych jest White Bear Of The North. W sprawach dotyczących danych osobowych możesz się z nami skontaktować przez formularz w zakładce <button type="button" class="link-button" onclick="switchTab(null, 'contact'); window.scrollTo({ top: 0, behavior: 'smooth' });">Napisz do nas</button>.</p>
+          </div>
+
+          <div class="about-card">
+            <h3>Licznik odwiedzin i „Online teraz"</h3>
+            <p>Serwis zlicza łączną liczbę odwiedzin. Licznik zwiększa się raz na sesję przeglądarki i nie zawiera danych pozwalających zidentyfikować osobę.</p>
+            <p>Aby pokazać liczbę osób online, przeglądarka tworzy losowy identyfikator sesji (zapisany w pamięci sesji przeglądarki, który znika po zamknięciu karty) i co ok. 30 sekund wysyła go do naszej bazy wraz z czasem ostatniej aktywności. Identyfikator nie jest powiązany z imieniem, adresem e-mail ani innymi danymi, a nieaktywne wpisy są automatycznie usuwane. Serwis nie ustawia własnych plików cookie. Dostawcy infrastruktury, z której korzysta (np. sieć Cloudflare przed usługą Supabase), mogą ustawiać techniczne pliki cookie służące bezpieczeństwu i ochronie przed botami.</p>
+          </div>
+
+          <div class="about-card">
+            <h3>Formularze kontaktowe</h3>
+            <p>Dane podane w formularzach (imię lub pseudonim, adres e-mail, temat, treść wiadomości, a w formularzu współpracy także nazwa organizacji i osoba do kontaktu) wykorzystujemy wyłącznie do odpowiedzi na wiadomość. Przekazanie ich do naszej skrzynki e-mail odbywa się przez usługę Web3Forms. Dane przechowujemy tak długo, jak jest to potrzebne do obsługi sprawy, a następnie je usuwamy.</p>
+          </div>
+
+          <div class="about-card">
+            <h3>Podmioty zewnętrzne</h3>
+            <p>Podczas korzystania z serwisu Twoja przeglądarka łączy się z zewnętrznymi usługami, które mogą w związku z tym widzieć Twój adres IP i dane techniczne przeglądarki:</p>
+            <ul>
+              <li><strong>Supabase</strong> – baza danych alertów i liczników</li>
+              <li><strong>jsDelivr</strong> – dostarczanie bibliotek JavaScript i stylów (m.in. mapa Leaflet)</li>
+              <li><strong>CARTO / OpenStreetMap</strong> – kafelki mapy</li>
+              <li><strong>Web3Forms</strong> – obsługa wysyłki formularzy</li>
+              <li><strong>hCaptcha</strong> – weryfikacja antyspamowa formularzy (może przetwarzać adres IP i dane techniczne przeglądarki)</li>
+              <li><strong>GitHub (GitHub Pages)</strong> – hosting serwisu</li>
+            </ul>
+          </div>
+
+          <div class="about-card">
+            <h3>Podstawa prawna i Twoje prawa</h3>
+            <p>Dane przetwarzamy w celu prowadzenia serwisu i odpowiadania na wiadomości, na podstawie prawnie uzasadnionego interesu administratora (art. 6 ust. 1 lit. f RODO). Masz prawo dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania i sprzeciwu wobec przetwarzania. Możesz też złożyć skargę do Prezesa Urzędu Ochrony Danych Osobowych (uodo.gov.pl).</p>
+          </div>
+
+          <div class="about-card">
+            <h3>Zmiany</h3>
+            <p>Polityka może być aktualizowana wraz z rozwojem serwisu. Aktualna wersja jest zawsze dostępna na tej stronie. Data ostatniej aktualizacji: 3 października 2026 r..</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- TAB 5: CONTACT -->
-    <div id="contact-tab" class="tab-content">
+    <div id="contact-tab" class="tab-content" role="tabpanel" aria-labelledby="tab-contact">
       <div class="form-container">
         <h2 class="form-title">Napisz do nas</h2>
         <p class="form-subtitle">Masz pytania dotyczące działania systemu lub chcesz zgłosić uwagę? Wypełnij formularz.</p>
 
         <form id="contact-form" onsubmit="sendEmail(event, 'Formularz Kontaktowy - European Threat Detection', 'contact-status')">
+          <input type="checkbox" name="botcheck" id="contact-botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none;">
           <div class="form-group">
             <label for="contact-name">Imię i nazwisko / Pseudonim</label>
             <input type="text" name="name" id="contact-name" class="form-control" placeholder="np. Jan Kowalski" required>
@@ -1578,19 +1668,22 @@
             <label for="contact-message">Treść wiadomości</label>
             <textarea name="message" id="contact-message" class="form-control" placeholder="Opisz swoje zapytanie..." required></textarea>
           </div>
+          <div class="h-captcha" data-captcha="true" data-theme="dark"></div>
+          <p class="form-privacy-note">Wysyłając formularz, przekazujesz podane dane w celu udzielenia odpowiedzi. Szczegóły w <button type="button" class="link-button" onclick="switchTab(null, 'privacy')">Polityce prywatności</button>.</p>
           <button type="submit" class="btn-submit">Wyślij wiadomość</button>
-          <div id="contact-status" class="form-status"></div>
+          <div id="contact-status" class="form-status" role="status" aria-live="polite"></div>
         </form>
       </div>
     </div>
 
     <!-- TAB 6: COOPERATION -->
-    <div id="cooperation-tab" class="tab-content">
+    <div id="cooperation-tab" class="tab-content" role="tabpanel" aria-labelledby="tab-cooperation">
       <div class="form-container">
         <h2 class="form-title">Nawiąż współpracę</h2>
         <p class="form-subtitle">Jesteś przedstawicielem służb, analitykiem lub organizacją technologiczną? Dołącz do projektu.</p>
 
         <form id="cooperation-form" onsubmit="sendEmail(event, 'Zgłoszenie Współpracy - European Threat Detection', 'cooperation-status')">
+          <input type="checkbox" name="botcheck" id="coop-botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none;">
           <div class="form-group">
             <label for="coop-entity">Nazwa organizacji / Służby / Firmy</label>
             <input type="text" name="organization" id="coop-entity" class="form-control" placeholder="np. Centrum Analiz Bezpieczeństwa" required>
@@ -1616,8 +1709,10 @@
             <label for="coop-details">Szczegóły propozycji</label>
             <textarea name="message" id="coop-details" class="form-control" placeholder="Opisz krótko proponowany zakres współpracy..." required></textarea>
           </div>
+          <div class="h-captcha" data-captcha="true" data-theme="dark"></div>
+          <p class="form-privacy-note">Wysyłając formularz, przekazujesz podane dane w celu udzielenia odpowiedzi. Szczegóły w <button type="button" class="link-button" onclick="switchTab(null, 'privacy')">Polityce prywatności</button>.</p>
           <button type="submit" class="btn-submit">Wyślij zgłoszenie współpracy</button>
-          <div id="cooperation-status" class="form-status"></div>
+          <div id="cooperation-status" class="form-status" role="status" aria-live="polite"></div>
         </form>
       </div>
     </div>
@@ -1639,10 +1734,14 @@
           <div class="status-dot"></div>
         </div>
         <span>Online teraz:</span>
-        <span id="online-count" class="counter-value">0</span></span>
+        <span id="online-count" class="counter-value">0</span>
       </div>
     </div>
   </footer>
+
+  <div class="privacy-link-bar">
+    <button type="button" class="link-button" onclick="switchTab(null, 'privacy'); window.scrollTo({ top: 0, behavior: 'smooth' });">Polityka prywatności</button>
+  </div>
 
   <!-- OSOBNY WIERSZ: AKTUALIZACJA BAZY -->
   <div class="database-update-bar" style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.75rem; opacity: 0.8; margin-top: 6px; padding-bottom: 12px;">
@@ -1656,11 +1755,13 @@
   </div>
 
   <!-- SKRYPTY -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
-</script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
+    // Diagnostic logging is silent by default; add ?debug=1 to the URL to enable it.
+    const ETD_DEBUG = new URLSearchParams(window.location.search).has('debug');
+    function etdLog(...args) { if (ETD_DEBUG) console.log(...args); }
 function hasPreciseMapLocation(item) {
   if (!item) return false;
 
@@ -1706,7 +1807,7 @@ function hasValidCoordinates(latValue, lngValue) {
     let realtimeChannel = null;
     let realtimeReady = false;
     let realtimeReconnectTimer = null;
-// V2.7.11 PAGINATION V2 TEST
+// V2.7.11 pagination
 const ARCHIVE_PAGE_SIZE = 20;
 let archiveCurrentPage = 1;
 let archiveTotalCount = 0;
@@ -1768,18 +1869,49 @@ let archiveLoading = false;
 
     function switchTab(evt, tabName) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+
+      const navButtons = Array.from(document.querySelectorAll('.nav-btn'));
+      const targetBtn = document.getElementById(`tab-${tabName}`);
+
+      navButtons.forEach(btn => {
+        const isActive = btn === targetBtn;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        // Roving tabindex: only the active tab is in the Tab order. If no tab button
+        // matches (e.g. the privacy page), keep the first one reachable.
+        btn.tabIndex = isActive ? 0 : -1;
+      });
+      if (!targetBtn && navButtons[0]) navButtons[0].tabIndex = 0;
 
       const selectedTab = document.getElementById(`${tabName}-tab`);
       if (selectedTab) selectedTab.classList.add('active');
 
-      if (evt && evt.currentTarget) {
-        evt.currentTarget.classList.add('active');
-      }
-
       if (tabName === 'dashboard' && map) {
         setTimeout(() => map.invalidateSize(), 200);
       }
+    }
+
+    // Arrow-key navigation for the tab list (WAI-ARIA tabs pattern)
+    function initTabKeyboardNavigation() {
+      const tablist = document.querySelector('.nav-tabs[role="tablist"]');
+      if (!tablist) return;
+
+      tablist.addEventListener('keydown', (event) => {
+        const tabs = Array.from(tablist.querySelectorAll('[role="tab"]'));
+        const current = tabs.indexOf(document.activeElement);
+        if (current === -1) return;
+
+        let next = null;
+        if (event.key === 'ArrowRight') next = (current + 1) % tabs.length;
+        else if (event.key === 'ArrowLeft') next = (current - 1 + tabs.length) % tabs.length;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = tabs.length - 1;
+
+        if (next === null) return;
+        event.preventDefault();
+        tabs[next].focus();
+        tabs[next].click();
+      });
     }
 
     async function sendEmail(event, emailSubject, statusElementId) {
@@ -1788,12 +1920,38 @@ let archiveLoading = false;
       const form = event.target;
       const submitBtn = form.querySelector('.btn-submit');
       const statusEl = document.getElementById(statusElementId);
+      const originalBtnText = submitBtn.innerText;
 
       submitBtn.disabled = true;
       submitBtn.innerText = 'Wysyłanie...';
       statusEl.style.display = 'none';
 
       const formData = new FormData(form);
+
+      // Honeypot: real users never see or tick this field; bots usually fill every field.
+      if (formData.get('botcheck')) {
+        statusEl.innerText = 'Dziękujemy! Wiadomość została pomyślnie wysłana.';
+        statusEl.className = 'form-status success';
+        statusEl.style.display = 'block';
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.innerText = originalBtnText;
+        return;
+      }
+
+      // hCaptcha (Web3Forms free plan): the widget adds the h-captcha-response field to the form.
+      if (!formData.get('h-captcha-response')) {
+        const captchaLoaded = !!form.querySelector('.h-captcha iframe');
+        statusEl.innerText = captchaLoaded
+          ? 'Potwierdź, że nie jesteś robotem (zaznacz pole weryfikacji powyżej).'
+          : 'Weryfikacja antyspamowa nie załadowała się. Odśwież stronę i spróbuj ponownie.';
+        statusEl.className = 'form-status error';
+        statusEl.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.innerText = originalBtnText;
+        return;
+      }
+
       formData.append('access_key', WEB3FORMS_KEY);
       formData.append('subject', emailSubject);
 
@@ -1819,21 +1977,47 @@ let archiveLoading = false;
         statusEl.style.display = 'block';
       } finally {
         submitBtn.disabled = false;
-        submitBtn.innerText = 'Wyślij wiadomość';
+        submitBtn.innerText = originalBtnText;
+        resetCaptcha(form); // a captcha token can be used only once
       }
     }
 
+    function resetCaptcha(form) {
+      try {
+        if (!window.hcaptcha) return;
+        const frame = form.querySelector('.h-captcha iframe[data-hcaptcha-widget-id]');
+        const id = frame ? frame.getAttribute('data-hcaptcha-widget-id') : undefined;
+        window.hcaptcha.reset(id);
+      } catch (_) { /* widget not ready: nothing to reset */ }
+    }
+
     function initMap() {
+      if (typeof L === 'undefined') {
+        console.error('[ETD Map] Leaflet failed to load; map disabled.');
+        const mapEl = document.getElementById('map');
+        if (mapEl) mapEl.innerHTML = '<div style="padding:16px;color:#fca5a5;">Nie udało się załadować mapy.</div>';
+        return;
+      }
       map = L.map('map', {
         center: [50.1109, 8.6821],
         zoom: 5
       });
 
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=cb1_3zex_1_4690069ca0eb7acda7388423', {
-  maxZoom: 19,
-  className: 'dark-map-tiles',
-  attribution: '&copy; OpenStreetMap &copy; CARTO'
-}).addTo(map);
+      // CARTO raster basemap. The key is public by design; protect it with
+      // "website restrictions" in the CARTO Basemaps dashboard (list this site's host).
+      const CARTO_API_KEY = 'cb1_3zex_1_4690069ca0eb7acda7388423';
+
+      const cartoLayer = L.tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=${CARTO_API_KEY}`, {
+        maxZoom: 19,
+        subdomains: 'abcd',
+        className: 'dark-map-tiles',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> &copy; <a href="https://carto.com/attribution/" target="_blank" rel="noopener noreferrer">CARTO</a>'
+      }).addTo(map);
+
+      // One-time hint if tiles are refused (e.g. the key's website restrictions do not list this host)
+      cartoLayer.once('tileerror', () => {
+        console.warn('[ETD Map] Map tiles failed to load. If this happens only on a new domain or locally, check the CARTO key\'s website restrictions.');
+      });
 
       markersGroup = L.layerGroup().addTo(map);
       setTimeout(() => map.invalidateSize(), 100);
@@ -1889,11 +2073,13 @@ let archiveLoading = false;
       try {
         const host = new URL(url).hostname.toLowerCase().replace(/^www\./, '');
         const names = {
-          'wiadomosci.wp.pl': 'WP Wiadomości',
           'tagesschau.de': 'Tagesschau',
-          'derstandard.at': 'Der Standard',
+          'ansa.it': 'ANSA',
+          'bbc.com': 'BBC',
+          'bbc.co.uk': 'BBC',
           'vrt.be': 'VRT NWS',
-          'lemonde.fr': 'Le Monde'
+          'skynews.com': 'Sky News',
+          'france24.com': 'France24'
         };
         return names[host] || host;
       } catch (_) {
@@ -1902,7 +2088,7 @@ let archiveLoading = false;
     }
 
     
-    // V2.7.11 SUPABASE STATISTICS TEST
+    // V2.7.11 Supabase statistics
     let supabaseStatistics = null;
     let supabaseStatisticsLoading = false;
 
@@ -1915,7 +2101,7 @@ let archiveLoading = false;
         if (error) throw error;
 
         supabaseStatistics = data || null;
-        console.log('[ETD Statistics] loaded from Supabase RPC', supabaseStatistics);
+        etdLog('[ETD Statistics] loaded from Supabase RPC', supabaseStatistics);
 
         renderStatisticsFromSupabase();
       } catch (error) {
@@ -2030,7 +2216,7 @@ let archiveLoading = false;
         return createBarHtml(label, data.count, getCategoryColor(type));
       }).join('');
 
-      console.log('[ETD Statistics] rendered from Supabase RPC');
+      etdLog('[ETD Statistics] rendered from Supabase RPC');
     }
 
 
@@ -2122,8 +2308,15 @@ function renderAllViews() {
       };
     }
 
+    let archiveReloadQueued = false;
+
     async function loadArchivePage() {
-      if (archiveLoading) return;
+      if (archiveLoading) {
+        // A request is already running: remember that a newer one is needed
+        // instead of silently dropping the latest input.
+        archiveReloadQueued = true;
+        return;
+      }
       archiveLoading = true;
 
       const tbody = document.getElementById('archive-table-body');
@@ -2179,16 +2372,29 @@ function renderAllViews() {
         if (tbody) tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#fca5a5;">Nie udało się pobrać archiwum.</td></tr>';
       } finally {
         archiveLoading = false;
+        if (archiveReloadQueued) {
+          archiveReloadQueued = false;
+          loadArchivePage();
+        }
       }
     }
+
+    // The map and sidebar only need recent alerts; older ones live in the archive tab.
+    const MAP_ALERTS_DAYS = 90;
 
     async function loadAlerts() {
       setLiveStatus('loading');
 
       try {
+        const sinceIso = new Date(Date.now() - MAP_ALERTS_DAYS * 24 * 60 * 60 * 1000)
+          .toISOString()
+          .split('.')[0] + 'Z';
+
         const { data, error } = await supabaseClient
           .from('alerts')
           .select('id,guid,title,summary,type,type_name,country,city,location,lat,lng,source_url,pub_date,created_at,updated_at')
+          // alerts published in the window, or without pub_date but created in the window
+          .or(`pub_date.gte.${sinceIso},and(pub_date.is.null,created_at.gte.${sinceIso})`)
           .order('pub_date', { ascending: false, nullsFirst: false })
           .order('created_at', { ascending: false });
 
@@ -2281,11 +2487,11 @@ function renderAllViews() {
       if (realtimeResyncInProgress) return;
 
       realtimeResyncInProgress = true;
-      console.log('[ETD Realtime] resync: start');
+      etdLog('[ETD Realtime] resync: start');
 
       try {
         await loadAlerts();
-        console.log('[ETD Realtime] resync: complete');
+        etdLog('[ETD Realtime] resync: complete');
       } catch (error) {
         console.error('[ETD Realtime] resync: failed', error);
       } finally {
@@ -2308,7 +2514,7 @@ function renderAllViews() {
           'postgres_changes',
           { event: 'INSERT', schema: 'public', table: 'alerts' },
           (payload) => {
-            console.log('[ETD Realtime] INSERT', payload.new?.id);
+            etdLog('[ETD Realtime] INSERT', payload.new?.id);
             upsertRealtimeAlert(payload.new);
           }
         )
@@ -2316,7 +2522,7 @@ function renderAllViews() {
           'postgres_changes',
           { event: 'UPDATE', schema: 'public', table: 'alerts' },
           (payload) => {
-            console.log('[ETD Realtime] UPDATE', payload.new?.id);
+            etdLog('[ETD Realtime] UPDATE', payload.new?.id);
             upsertRealtimeAlert(payload.new);
             loadStatisticsFromSupabase();
           }
@@ -2325,12 +2531,12 @@ function renderAllViews() {
           'postgres_changes',
           { event: 'DELETE', schema: 'public', table: 'alerts' },
           (payload) => {
-            console.log('[ETD Realtime] DELETE', payload.old?.id);
+            etdLog('[ETD Realtime] DELETE', payload.old?.id);
             removeRealtimeAlert(payload.old);
           }
         )
         .subscribe((status) => {
-          console.log('[ETD Realtime] status:', status);
+          etdLog('[ETD Realtime] status:', status);
 
           if (status === 'SUBSCRIBED') {
             const wasAlreadyReady = realtimeReady;
@@ -2504,6 +2710,7 @@ function renderAllViews() {
           : '';
         const locationText = item.location || item.location_name || 'Brak danych';
         const coordsText = hasPreciseMapLocation(item) ? `${Number(item.lat).toFixed(4)}, ${Number(item.lng).toFixed(4)}` : 'Brak geolokalizacji';
+        const safeSourceUrl = getSafeHttpUrl(item.source_url);
 
         const tr = document.createElement('tr');
         tr.innerHTML = `
@@ -2514,12 +2721,12 @@ function renderAllViews() {
           <td style="color:#64748b; font-family:monospace;">${escapeHtml(coordsText)}</td>
         
           <td>
-            ${item.source_url ? `
+            ${safeSourceUrl ? `
               <a class="archive-source-link"
-                 href="${escapeHtml(item.source_url)}"
+                 href="${escapeHtml(safeSourceUrl)}"
                  target="_blank"
                  rel="noopener noreferrer">
-                ↗ ${escapeHtml(getSourceName(item.source_url))}
+                ↗ ${escapeHtml(getSourceName(safeSourceUrl))}
               </a>
             ` : '<span style="color:#64748b;">brak</span>'}
           </td>
@@ -2529,7 +2736,7 @@ function renderAllViews() {
     }
 
     function renderStatistics(alerts) {
-      // Legacy entry point intentionally disabled in this test.
+      // Legacy entry point intentionally disabled.
       // Statistics are rendered exclusively from Supabase RPC.
       if (supabaseStatistics) renderStatisticsFromSupabase();
     }
@@ -2540,7 +2747,15 @@ function renderAllViews() {
       loadArchivePage();
     }
 
+    // Typing in the search box: wait until the user pauses before querying the database.
+    let archiveSearchTimer = null;
+    function filterArchiveDebounced() {
+      clearTimeout(archiveSearchTimer);
+      archiveSearchTimer = setTimeout(filterArchive, 300);
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
+      initTabKeyboardNavigation();
       initMap();
       loadAlerts();
       loadArchivePage();
@@ -2553,7 +2768,7 @@ function renderAllViews() {
   
 
 /* =========================================================
-   ETD V2.7.11 - ONLINE NOW TEST FIXED
+   ETD V2.7.11 - ONLINE NOW
    ========================================================= */
 const ONLINE_HEARTBEAT_MS = 30000;
 const ONLINE_REFRESH_MS = 30000;
@@ -2561,17 +2776,36 @@ let onlineSessionId = null;
 let onlineHeartbeatTimer = null;
 let onlineRefreshTimer = null;
 
+function isValidUuid(value) {
+  return typeof value === 'string' &&
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
+}
+
+function generateUuidV4() {
+  if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+    return window.crypto.randomUUID();
+  }
+  // Fallback: valid UUID v4 (the database column is of type uuid)
+  const bytes = new Uint8Array(16);
+  if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+    window.crypto.getRandomValues(bytes);
+  } else {
+    for (let i = 0; i < 16; i++) bytes[i] = Math.floor(Math.random() * 256);
+  }
+  bytes[6] = (bytes[6] & 0x0f) | 0x40;
+  bytes[8] = (bytes[8] & 0x3f) | 0x80;
+  const hex = Array.from(bytes, b => b.toString(16).padStart(2, '0'));
+  return `${hex.slice(0, 4).join('')}-${hex.slice(4, 6).join('')}-${hex.slice(6, 8).join('')}-${hex.slice(8, 10).join('')}-${hex.slice(10).join('')}`;
+}
+
 function getOrCreateOnlineSessionId() {
   const key = 'etd_online_session_id';
-  let id = sessionStorage.getItem(key);
+  let id = null;
+  try { id = sessionStorage.getItem(key); } catch (_) {}
 
-  if (!id) {
-    if (window.crypto && typeof window.crypto.randomUUID === 'function') {
-      id = window.crypto.randomUUID();
-    } else {
-      id = 'etd-' + Date.now() + '-' + Math.random().toString(16).slice(2);
-    }
-    sessionStorage.setItem(key, id);
+  if (!isValidUuid(id)) {
+    id = generateUuidV4();
+    try { sessionStorage.setItem(key, id); } catch (_) {}
   }
 
   return id;
@@ -2586,26 +2820,19 @@ function setOnlineCount(value) {
 }
 
 async function upsertOnlinePresence() {
-  if (!onlineSessionId) return;
+  if (!onlineSessionId) return false;
 
-  const { error } = await supabaseClient
-    .from('active_visitors')
-    .upsert(
-      {
-        session_id: onlineSessionId,
-        last_seen: new Date().toISOString()
-      },
-      {
-        onConflict: 'session_id'
-      }
-    );
+  // The table is no longer written directly: the heartbeat RPC sets last_seen server-side.
+  const { error } = await supabaseClient.rpc('heartbeat', {
+    p_session_id: onlineSessionId
+  });
 
   if (error) {
     console.error('[ETD Online] heartbeat error', error);
     return false;
   }
 
-  console.log('[ETD Online] heartbeat OK');
+  etdLog('[ETD Online] heartbeat OK');
   return true;
 }
 
@@ -2618,7 +2845,20 @@ async function loadOnlineCount() {
   }
 
   setOnlineCount(data);
-  console.log('[ETD Online] active visitors:', data);
+  etdLog('[ETD Online] active visitors:', data);
+}
+
+function stopOnlineTimers() {
+  if (onlineHeartbeatTimer) clearInterval(onlineHeartbeatTimer);
+  if (onlineRefreshTimer) clearInterval(onlineRefreshTimer);
+  onlineHeartbeatTimer = null;
+  onlineRefreshTimer = null;
+}
+
+function startOnlineTimers() {
+  stopOnlineTimers();
+  onlineHeartbeatTimer = setInterval(upsertOnlinePresence, ONLINE_HEARTBEAT_MS);
+  onlineRefreshTimer = setInterval(loadOnlineCount, ONLINE_REFRESH_MS);
 }
 
 async function initOnlineNow() {
@@ -2632,25 +2872,28 @@ async function initOnlineNow() {
   await upsertOnlinePresence();
   await loadOnlineCount();
 
-  if (onlineHeartbeatTimer) clearInterval(onlineHeartbeatTimer);
-  if (onlineRefreshTimer) clearInterval(onlineRefreshTimer);
-
-  onlineHeartbeatTimer = setInterval(upsertOnlinePresence, ONLINE_HEARTBEAT_MS);
-  onlineRefreshTimer = setInterval(loadOnlineCount, ONLINE_REFRESH_MS);
+  // Timers run only while the tab is visible; background tabs stay quiet
+  // (they drop out of the online count after the server-side window expires).
+  if (document.visibilityState === 'visible') startOnlineTimers();
 
   if (!document.body.dataset.etdOnlineVisibilityBound) {
     document.addEventListener('visibilitychange', async () => {
       if (document.visibilityState === 'visible') {
         await upsertOnlinePresence();
         await loadOnlineCount();
+        startOnlineTimers();
+      } else {
+        stopOnlineTimers();
       }
     });
     document.body.dataset.etdOnlineVisibilityBound = 'true';
   }
 
-  console.log('[ETD Online] initialized');
+  etdLog('[ETD Online] initialized');
 }
 
 </script>
+  <!-- Web3Forms client script: renders the hCaptcha widget (free plan) -->
+  <script src="https://web3forms.com/client/script.js" async defer></script>
 </body>
 </html>
